@@ -15,7 +15,7 @@
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  "plugins": ["react", "react-hooks", "import", "@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "import"],
   "rules": {
     "react-hooks/exhaustive-deps": "error",
     "react/no-unescaped-entities": "error",

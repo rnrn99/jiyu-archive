@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import 'react-notion-x/src/styles.css';
 import '../styles/globals.css';
 
 export const metadata: Metadata = {

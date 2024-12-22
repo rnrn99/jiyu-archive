@@ -27,7 +27,7 @@
     "@typescript-eslint/naming-convention": [
       "warn",
       {
-        "format": ["camelCase", "UPPER_CASE"],
+        "format": ["camelCase", "UPPER_CASE", "PascalCase"],
         "selector": "variable",
         "leadingUnderscore": "allow"
       },
@@ -41,7 +41,7 @@
         "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"], "object"],
         "pathGroups": [
           {
-            "pattern": "{react*,react/**,}",
+            "pattern": "{react,react/**,}",
             "group": "external",
             "position": "before"
           },

@@ -27,7 +27,7 @@
     "@typescript-eslint/naming-convention": [
       "warn",
       {
-        "format": ["camelCase", "UPPER_CASE"],
+        "format": ["camelCase", "UPPER_CASE", "PascalCase"],
         "selector": "variable",
         "leadingUnderscore": "allow"
       },

@@ -41,7 +41,7 @@
         "groups": ["builtin", "external", "internal", ["parent", "sibling", "index"], "object"],
         "pathGroups": [
           {
-            "pattern": "{react*,react/**,}",
+            "pattern": "{react,react/**,}",
             "group": "external",
             "position": "before"
           },

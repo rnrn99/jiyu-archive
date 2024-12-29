@@ -4,10 +4,15 @@ import { notion } from '@/infrastructure/notion/adapter/api';
 
 import Renderer from './_components/Renderer';
 
-async function DetailPage({ params }: { params: { pageId: string } }) {
-  const result = await notion.getPageData(params.pageId);
+interface PostPageParams {
+  pageId: string;
+}
+
+async function PostPage({ params }: { params: Promise<PostPageParams> }) {
+  const { pageId } = await params;
+  const result = await notion.getPageData(pageId);
 
   return <Renderer recordMap={result} />;
 }
 
-export default DetailPage;
+export default PostPage;

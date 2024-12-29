@@ -12,6 +12,10 @@ export default {
         notoSansKr: 'var(--font-noto-sans)',
         nanumGothicCoding: 'var(--font-nanum-gothic-coding)',
       },
+      screens: {
+        tablet: '768px',
+        desktop: '1200px',
+      },
       colors: {
         transparent: 'transparent',
         currentColor: 'currentColor',

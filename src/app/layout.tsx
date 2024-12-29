@@ -1,7 +1,11 @@
-import type { Metadata } from 'next';
-
 import 'react-notion-x/src/styles.css';
 import '../styles/globals.css';
+
+import type { Metadata } from 'next';
+
+import clsx from 'clsx';
+
+import { notoSansKr, nanumGothicCoding } from './font';
 
 export const metadata: Metadata = {
   title: '',
@@ -14,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={clsx(notoSansKr.variable, nanumGothicCoding.variable)}>
       <body>{children}</body>
     </html>
   );

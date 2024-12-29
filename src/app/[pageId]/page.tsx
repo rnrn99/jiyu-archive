@@ -10,6 +10,7 @@ interface PostPageParams {
 
 async function PostPage({ params }: { params: Promise<PostPageParams> }) {
   const { pageId } = await params;
+
   const result = await notion.getPageData(pageId);
 
   return <Renderer recordMap={result} />;

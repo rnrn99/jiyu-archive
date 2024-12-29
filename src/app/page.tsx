@@ -4,7 +4,6 @@ import { notion } from '@/infrastructure/notion/adapter/api';
 
 import PageList from './_components/PageList';
 
-import 'prismjs/themes/prism-tomorrow.css';
 import 'katex/dist/katex.min.css';
 
 export default async function Home() {

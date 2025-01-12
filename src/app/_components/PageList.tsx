@@ -11,11 +11,11 @@ interface Props {
 }
 
 function PageList({ recordMap }: Props) {
-  const pageIds = NotionAdapter.getPageIds(recordMap);
+  const postSummaries = NotionAdapter.getPostSummaries(recordMap);
 
   return (
     <>
-      {pageIds?.map((id) => (
+      {postSummaries?.map(({ id }) => (
         <Link key={id} href={`/${id}`}>
           go to {id}
         </Link>

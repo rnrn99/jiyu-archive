@@ -22,6 +22,7 @@
     "react/no-unescaped-entities": "error",
     "react/react-in-jsx-scope": "off",
     "no-alert": "off",
+    "@typescript-eslint/no-inferrable-types": "warn",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/naming-convention": [

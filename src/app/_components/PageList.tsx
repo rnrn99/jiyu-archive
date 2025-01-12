@@ -11,16 +11,18 @@ interface Props {
 }
 
 function PageList({ recordMap }: Props) {
-  const pageIds = NotionAdapter.getPageIds(recordMap);
+  const postSummaries = NotionAdapter.getPostSummaries(recordMap);
 
   return (
-    <>
-      {pageIds?.map((id) => (
+    <article className="flex flex-col gap-1">
+      {postSummaries?.map(({ id, title }) => (
         <Link key={id} href={`/${id}`}>
-          go to {id}
+          <div className="px-[20px] border border-solid border-blue-50 rounded w-1/2 h-[50px]">
+            <h1 className="text-base">{title}</h1>
+          </div>
         </Link>
       ))}
-    </>
+    </article>
   );
 }
 

@@ -1,4 +1,4 @@
-import { ExtendedRecordMap } from 'notion-types';
+import { Decoration, ExtendedRecordMap } from 'notion-types';
 
 import { PostSummary } from '@/entity/post/type';
 
@@ -15,8 +15,9 @@ class NotionAdapter {
   };
 
   /**
-   * post의 정보를 반환합니다.
+   * post list에서 post의 정보를 반환합니다.
    */
+  // TODO: 아카이브 페이지 정보 가져와서 사용하도록 수정 필요
   static getPostSummaries = (recordMap: ExtendedRecordMap): Array<PostSummary> => {
     const block = recordMap.block;
     const postIds = this.getPostIds(recordMap);
@@ -59,6 +60,20 @@ class NotionAdapter {
       return summary;
     });
   };
+
+  static getPageTitle(recordMap: ExtendedRecordMap) {
+    const pageInfoBlock = Object.values(recordMap.block)[0]?.value;
+    const titleBlock = pageInfoBlock.properties?.title;
+
+    if (titleBlock && Array.isArray(titleBlock)) {
+      return (titleBlock as Decoration[])?.reduce(
+        (prev, current) => prev + (current[0] !== '⁍' && current[0] !== '‣' ? current[0] : ''),
+        '',
+      );
+    }
+
+    return '';
+  }
 }
 
 export default NotionAdapter;

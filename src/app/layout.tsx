@@ -6,6 +6,8 @@ import type { Metadata } from 'next';
 
 import clsx from 'clsx';
 
+import Layout from '@/components/Layout';
+
 import { notoSansKr, nanumGothicCoding } from './font';
 
 export const metadata: Metadata = {
@@ -20,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={clsx(notoSansKr.variable, nanumGothicCoding.variable)}>
-      <body>{children}</body>
+      <body>
+        <Layout>{children}</Layout>
+      </body>
     </html>
   );
 }

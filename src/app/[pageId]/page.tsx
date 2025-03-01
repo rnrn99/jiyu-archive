@@ -17,7 +17,7 @@ async function PostPage({ params }: { params: Promise<PostPageParams> }) {
 
   return (
     <>
-      <h1 className="font-bold text-4xl ml-[60px] pl-[16px] my-5">{title}</h1>
+      <h1 className="font-bold text-3xl my-5 tablet:text-4xl px-[16px]">{title}</h1>
       <Renderer recordMap={result} />
     </>
   );

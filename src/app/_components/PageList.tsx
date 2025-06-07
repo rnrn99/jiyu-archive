@@ -4,7 +4,16 @@ import Link from 'next/link';
 
 import { ExtendedRecordMap } from 'notion-types';
 
+import PostEntity from '@/entity/post';
 import NotionAdapter from '@/infrastructure/notion/adapter';
+
+import * as styles from './PageList.css';
+
+const getFormattedWrittenDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  return `${year}.${month.toString().padStart(2, '0')}`;
+};
 
 interface Props {
   recordMap: ExtendedRecordMap;
@@ -12,16 +21,23 @@ interface Props {
 
 function PageList({ recordMap }: Props) {
   const postSummaries = NotionAdapter.getPostSummaries(recordMap);
+  const publicPosts = postSummaries.filter((post) => PostEntity.isPublic(post.status));
 
   return (
-    <article>
-      {postSummaries?.map(({ id, title }) => (
-        <Link key={id} href={`/${id}`}>
-          <div>
-            <h1>{title}</h1>
-          </div>
-        </Link>
-      ))}
+    <article className={styles.article}>
+      <h1 className={styles.pageTitle}>Posts</h1>
+      <ul>
+        {publicPosts?.map(({ id, title, written }) => (
+          <li key={id} className={styles.postItem}>
+            <Link href={`/${id}`} className={styles.link}>
+              <h2 className={styles.title}>{title}</h2>
+              {written && (
+                <time className={styles.written}>{getFormattedWrittenDate(written)}</time>
+              )}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </article>
   );
 }

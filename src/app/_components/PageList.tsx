@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { ExtendedRecordMap } from 'notion-types';
 
+import TextDivider from '@/components/Divider/TextDivider';
 import PostEntity from '@/entity/post';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 
@@ -27,13 +28,15 @@ function PageList({ recordMap }: Props) {
     <article className={styles.article}>
       <h1 className={styles.pageTitle}>Posts</h1>
       <ul>
-        {publicPosts?.map(({ id, title, written, slug }) => (
-          <li key={id} className={styles.postItem}>
+        {publicPosts?.map(({ id, title, written, slug, category }) => (
+          <li key={id}>
             <Link href={`/posts/${slug}`} className={styles.link}>
               <h2 className={styles.title}>{title}</h2>
-              {written && (
-                <time className={styles.written}>{getFormattedWrittenDate(written)}</time>
-              )}
+              <div className={styles.postSummaryWrapper}>
+                <time>{getFormattedWrittenDate(written)}</time>
+                <TextDivider gap={8} size={12} />
+                <span>{category}</span>
+              </div>
             </Link>
           </li>
         ))}

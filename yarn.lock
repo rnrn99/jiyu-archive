@@ -776,6 +776,13 @@
     modern-ahocorasick "^1.0.0"
     picocolors "^1.0.0"
 
+"@vanilla-extract/dynamic@^2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/dynamic/-/dynamic-2.1.5.tgz#2e2721d5e17071c161e3fdf29b8204772e3bbabc"
+  integrity sha512-QGIFGb1qyXQkbzx6X6i3+3LMc/iv/ZMBttMBL+Wm/DetQd36KsKsFg5CtH3qy+1hCA/5w93mEIIAiL4fkM8ycw==
+  dependencies:
+    "@vanilla-extract/private" "^1.0.9"
+
 "@vanilla-extract/integration@^8.0.2":
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/@vanilla-extract/integration/-/integration-8.0.2.tgz#155d6e8916659de985a3da55a71fe115f71df2f0"
@@ -803,6 +810,11 @@
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@vanilla-extract/private/-/private-1.0.7.tgz#491fb106f9d4a5a96e3e5be29f52ecc228c0952b"
   integrity sha512-v9Yb0bZ5H5Kr8ciwPXyEToOFD7J/fKKH93BYP7NCSZg02VYsA/pNFrLeVDJM2OO/vsygduPKuiEI6ORGQ4IcBw==
+
+"@vanilla-extract/private@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@vanilla-extract/private/-/private-1.0.9.tgz#bb8aaf72d2e04439792f2e389d9b705cfe691bc0"
+  integrity sha512-gT2jbfZuaaCLrAxwXbRgIhGhcXbRZCG3v4TTUnjw0EJ7ArdBRxkq4msNJkbuRkCgfIK5ATmprB5t9ljvLeFDEA==
 
 "@vanilla-extract/webpack-plugin@^2.3.19":
   version "2.3.19"

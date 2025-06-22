@@ -1,7 +1,7 @@
-import { ExtendedRecordMap, ID } from 'notion-types';
+import { ExtendedRecordMap } from 'notion-types';
 
 export type NotionAPIParams = {
-  getPageData: ID;
+  getPageData: string;
 };
 
 export type NotionAPIResponse = {

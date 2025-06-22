@@ -6,5 +6,6 @@ export type PostSummary = {
   category: string;
   status: PostStatus;
   written: Date;
+  slug: string;
   tag?: string[];
 };

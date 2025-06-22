@@ -17,7 +17,6 @@ class NotionAdapter {
   /**
    * post list에서 post의 정보를 반환합니다.
    */
-  // TODO: 아카이브 페이지 정보 가져와서 사용하도록 수정 필요
   static getPostSummaries = (recordMap: ExtendedRecordMap): Array<PostSummary> => {
     const block = recordMap.block;
     const postIds = this.getPostIds(recordMap);
@@ -27,13 +26,15 @@ class NotionAdapter {
     const schema = this.getPostSchema(recordMap);
 
     return postIds.map((postId) => {
-      const postProperties = block[postId].value.properties as { [key in string]: unknown[] };
+      const postValue = block[postId].value;
+      const written = new Date(postValue.created_time);
       const summary = {
         id: postId,
+        written,
       } as PostSummary;
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      Object.entries(postProperties).map(([key, value]: [string, any]) => {
+      Object.entries(postValue.properties).map(([key, value]: [string, any]) => {
         const name = schema[key]?.name as keyof PostSummary;
         if (!name) return;
 
@@ -45,14 +46,14 @@ class NotionAdapter {
           case 'status':
             summary[name] = value[0][0] as PostSummary[typeof name];
             break;
+
+          case 'slug':
+            summary[name] = value[0][0] as PostSummary[typeof name];
+            break;
+
           case 'tag': {
             const tags = value[0][0].split(',') as PostSummary[typeof name];
             summary[name] = tags;
-            break;
-          }
-          case 'written': {
-            const date = value[0][1][0][1].start_date as PostSummary[typeof name];
-            summary[name] = new Date(date);
             break;
           }
         }
@@ -74,6 +75,13 @@ class NotionAdapter {
 
     return '';
   }
+
+  static getPageIdBySlug = (recordMap: ExtendedRecordMap, slug: PostSummary['slug']) => {
+    const postSummaries = this.getPostSummaries(recordMap);
+    const currentPost = postSummaries.find((post) => post.slug === slug);
+
+    return currentPost?.id ?? '';
+  };
 }
 
 export default NotionAdapter;

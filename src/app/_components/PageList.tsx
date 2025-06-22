@@ -29,7 +29,7 @@ function PageList({ recordMap }: Props) {
       <h1 className={styles.pageTitle}>Posts</h1>
       <ul>
         {publicPosts?.map(({ id, title, written, slug, category }) => (
-          <li key={id} className={styles.postItem}>
+          <li key={id}>
             <Link href={`/posts/${slug}`} className={styles.link}>
               <h2 className={styles.title}>{title}</h2>
               <div className={styles.postSummaryWrapper}>

@@ -11,20 +11,44 @@ export const pageTitle = style({
   marginBottom: 40,
 });
 
-export const postItem = style({
-  padding: '24px 0',
-});
-
 export const link = style({
+  display: 'block',
+  padding: '24px 0',
   textDecoration: 'none',
   color: 'initial',
 });
 
 export const title = style({
+  position: 'relative',
+  display: 'inline-block',
   fontSize: 18,
   lineHeight: '26px',
   wordBreak: 'keep-all',
   color: '#333333',
+
+  selectors: {
+    '&::before, &::after': {
+      position: 'absolute',
+      display: 'inline-block',
+      opacity: 0,
+      transition: 'transform 300ms, opacity 200ms',
+    },
+    '&::before': {
+      content: '[',
+      left: -10,
+      transform: 'translateX(10px)',
+    },
+    '&::after': {
+      content: ']',
+      right: -10,
+      transform: 'translateX(-10px)',
+    },
+
+    [`${link}:hover &::before, ${link}:hover &::after`]: {
+      opacity: 1,
+      transform: 'translateX(0)',
+    },
+  },
 });
 
 export const postSummaryWrapper = style({

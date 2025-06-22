@@ -17,7 +17,6 @@ class NotionAdapter {
   /**
    * post list에서 post의 정보를 반환합니다.
    */
-  // TODO: 아카이브 페이지 정보 가져와서 사용하도록 수정 필요
   static getPostSummaries = (recordMap: ExtendedRecordMap): Array<PostSummary> => {
     const block = recordMap.block;
     const postIds = this.getPostIds(recordMap);
@@ -45,6 +44,11 @@ class NotionAdapter {
           case 'status':
             summary[name] = value[0][0] as PostSummary[typeof name];
             break;
+
+          case 'slug':
+            summary[name] = value[0][0] as PostSummary[typeof name];
+            break;
+
           case 'tag': {
             const tags = value[0][0].split(',') as PostSummary[typeof name];
             summary[name] = tags;

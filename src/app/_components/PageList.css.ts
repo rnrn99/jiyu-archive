@@ -20,7 +20,7 @@ export const link = style({
 
 export const title = style({
   position: 'relative',
-  display: 'inline-block',
+  display: 'inline',
   fontSize: 18,
   lineHeight: '26px',
   wordBreak: 'keep-all',
@@ -44,10 +44,11 @@ export const title = style({
       transform: 'translateX(-10px)',
     },
 
-    [`${link}:hover &::before, ${link}:hover &::after`]: {
-      opacity: 1,
-      transform: 'translateX(0)',
-    },
+    [`${link}:hover &::before, ${link}:hover &::after, ${link}:active &::before, ${link}:active &::after`]:
+      {
+        opacity: 1,
+        transform: 'translateX(0)',
+      },
   },
 });
 

@@ -26,13 +26,15 @@ class NotionAdapter {
     const schema = this.getPostSchema(recordMap);
 
     return postIds.map((postId) => {
-      const postProperties = block[postId].value.properties as { [key in string]: unknown[] };
+      const postValue = block[postId].value;
+      const written = new Date(postValue.created_time);
       const summary = {
         id: postId,
+        written,
       } as PostSummary;
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      Object.entries(postProperties).map(([key, value]: [string, any]) => {
+      Object.entries(postValue.properties).map(([key, value]: [string, any]) => {
         const name = schema[key]?.name as keyof PostSummary;
         if (!name) return;
 
@@ -52,11 +54,6 @@ class NotionAdapter {
           case 'tag': {
             const tags = value[0][0].split(',') as PostSummary[typeof name];
             summary[name] = tags;
-            break;
-          }
-          case 'written': {
-            const date = value[0][1][0][1].start_date as PostSummary[typeof name];
-            summary[name] = new Date(date);
             break;
           }
         }

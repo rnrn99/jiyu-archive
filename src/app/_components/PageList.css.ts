@@ -12,15 +12,12 @@ export const pageTitle = style({
 });
 
 export const postItem = style({
-  selectors: {
-    '&:not(:last-of-type)': {
-      padding: '16px 0',
-    },
-  },
+  padding: '24px 0',
 });
 
 export const link = style({
   textDecoration: 'none',
+  color: 'initial',
 });
 
 export const title = style({
@@ -30,15 +27,11 @@ export const title = style({
   color: '#333333',
 });
 
-export const written = style({
-  display: 'block',
+export const postSummaryWrapper = style({
+  display: 'flex',
+  alignItems: 'center',
   marginTop: 8,
+
   fontSize: 16,
   color: '#8c8c8c',
-
-  '@media': {
-    '(min-width: 768px)': {
-      marginTop: 16,
-    },
-  },
 });

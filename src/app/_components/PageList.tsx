@@ -27,9 +27,9 @@ function PageList({ recordMap }: Props) {
     <article className={styles.article}>
       <h1 className={styles.pageTitle}>Posts</h1>
       <ul>
-        {publicPosts?.map(({ id, title, written }) => (
+        {publicPosts?.map(({ id, title, written, slug }) => (
           <li key={id} className={styles.postItem}>
-            <Link href={`/${id}`} className={styles.link}>
+            <Link href={`/posts/${slug}`} className={styles.link}>
               <h2 className={styles.title}>{title}</h2>
               {written && (
                 <time className={styles.written}>{getFormattedWrittenDate(written)}</time>

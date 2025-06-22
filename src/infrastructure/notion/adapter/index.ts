@@ -75,6 +75,13 @@ class NotionAdapter {
 
     return '';
   }
+
+  static getPageIdBySlug = (recordMap: ExtendedRecordMap, slug: PostSummary['slug']) => {
+    const postSummaries = this.getPostSummaries(recordMap);
+    const currentPost = postSummaries.find((post) => post.slug === slug);
+
+    return currentPost?.id ?? '';
+  };
 }
 
 export default NotionAdapter;

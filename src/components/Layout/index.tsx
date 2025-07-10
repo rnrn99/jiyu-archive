@@ -1,9 +1,18 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 import * as styles from './index.css';
 
-function Layout({ children }: PropsWithChildren) {
-  return <main className={styles.layout}>{children}</main>;
+interface Props {
+  top?: ReactNode;
+}
+
+function Layout({ top, children }: PropsWithChildren<Props>) {
+  return (
+    <main>
+      {top}
+      <article className={styles.layout}>{children}</article>
+    </main>
+  );
 }
 
 export default Layout;

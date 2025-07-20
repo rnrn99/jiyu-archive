@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
+import { media } from '../media.css';
+
 export const header = style({
   width: '100%',
 
@@ -9,16 +11,26 @@ export const header = style({
   borderBottom: '1px solid #e0e0e0',
 });
 
-export const container = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
+export const container = style([
+  {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    rowGap: 20,
 
-  maxWidth: '800px',
-  height: '100%',
-  margin: '0 auto',
-  padding: '0 20px',
-});
+    maxWidth: '768px',
+    height: '100%',
+    margin: '0 auto',
+    padding: '0 16px',
+  },
+  media.tablet({
+    flexDirection: 'row',
+    alignItems: 'center',
+
+    padding: '0 20px',
+  }),
+]);
 
 export const titleWrapper = style({
   display: 'flex',

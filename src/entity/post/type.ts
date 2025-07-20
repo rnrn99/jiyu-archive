@@ -3,6 +3,7 @@ export type PostStatus = 'writing' | 'private' | 'public';
 export type PostSummary = {
   id: string;
   title: string;
+  description: string;
   category: string;
   status: PostStatus;
   written: Date;

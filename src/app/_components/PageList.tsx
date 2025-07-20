@@ -26,12 +26,12 @@ function PageList({ recordMap }: Props) {
 
   return (
     <article className={styles.article}>
-      <h1 className={styles.pageTitle}>Posts</h1>
       <ul>
-        {publicPosts?.map(({ id, title, written, slug, category }) => (
+        {publicPosts?.map(({ id, title, description, written, slug, category }) => (
           <li key={id}>
             <Link href={`/posts/${slug}`} className={styles.link}>
               <h2 className={styles.title}>{title}</h2>
+              <p>{description}</p>
               <div className={styles.postSummaryWrapper}>
                 <time>{getFormattedWrittenDate(written)}</time>
                 <TextDivider gap={8} size={12} />

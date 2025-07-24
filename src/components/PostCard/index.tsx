@@ -2,6 +2,7 @@ import React from 'react';
 
 import { PostSummary } from '@/entity/post/type';
 
+import CategoryBadge from './CategoryBadge';
 import CategoryIcon from './CategoryIcon';
 import * as styles from './index.css';
 
@@ -28,7 +29,7 @@ function PostCard({ title, description, written, category }: Props) {
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.description}>{description}</p>
       <div className={styles.postSummaryWrapper}>
-        <span>{category}</span>
+        <CategoryBadge category={category} />
       </div>
     </article>
   );

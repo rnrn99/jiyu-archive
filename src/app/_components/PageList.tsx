@@ -21,7 +21,7 @@ function PageList({ recordMap }: Props) {
   return (
     <article className={styles.article}>
       <ul>
-        {publicPosts?.map(({ id, title, description, written, slug, category }) => (
+        {publicPosts?.map(({ id, title, description, written, slug, category, tag }) => (
           <li key={id} className={styles.listItem}>
             <Link href={`/posts/${slug}`} className={styles.link}>
               <PostCard
@@ -29,6 +29,7 @@ function PageList({ recordMap }: Props) {
                 description={description}
                 written={written}
                 category={category}
+                tag={tag}
               />
             </Link>
           </li>

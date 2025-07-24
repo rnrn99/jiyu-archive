@@ -40,8 +40,10 @@ class NotionAdapter {
 
         switch (name) {
           case 'title':
-          case 'category':
           case 'description':
+            summary[name] = value[0][0] as PostSummary[typeof name];
+            break;
+          case 'category':
             summary[name] = value[0][0] as PostSummary[typeof name];
             break;
           case 'status':

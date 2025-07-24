@@ -19,7 +19,7 @@ interface Props {
 
 function PostCard({ title, description, written, category }: Props) {
   return (
-    <div className={styles.postCard}>
+    <article className={styles.postCard}>
       <div className={styles.header}>
         <time className={styles.written}>{getFormattedWrittenDate(written)}</time>
       </div>
@@ -28,7 +28,7 @@ function PostCard({ title, description, written, category }: Props) {
       <div className={styles.postSummaryWrapper}>
         <span>{category}</span>
       </div>
-    </div>
+    </article>
   );
 }
 

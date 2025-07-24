@@ -4,17 +4,11 @@ import Link from 'next/link';
 
 import { ExtendedRecordMap } from 'notion-types';
 
-import TextDivider from '@/components/Divider/TextDivider';
+import PostCard from '@/components/PostCard';
 import PostEntity from '@/entity/post';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 
 import * as styles from './PageList.css';
-
-const getFormattedWrittenDate = (date: Date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  return `${year}.${month.toString().padStart(2, '0')}`;
-};
 
 interface Props {
   recordMap: ExtendedRecordMap;
@@ -26,17 +20,16 @@ function PageList({ recordMap }: Props) {
 
   return (
     <article className={styles.article}>
-      <h1 className={styles.pageTitle}>Posts</h1>
       <ul>
-        {publicPosts?.map(({ id, title, written, slug, category }) => (
-          <li key={id}>
+        {publicPosts?.map(({ id, title, description, written, slug, category }) => (
+          <li key={id} className={styles.listItem}>
             <Link href={`/posts/${slug}`} className={styles.link}>
-              <h2 className={styles.title}>{title}</h2>
-              <div className={styles.postSummaryWrapper}>
-                <time>{getFormattedWrittenDate(written)}</time>
-                <TextDivider gap={8} size={12} />
-                <span>{category}</span>
-              </div>
+              <PostCard
+                title={title}
+                description={description}
+                written={written}
+                category={category}
+              />
             </Link>
           </li>
         ))}

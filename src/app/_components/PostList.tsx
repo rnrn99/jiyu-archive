@@ -8,13 +8,13 @@ import PostCard from '@/components/PostCard';
 import PostEntity from '@/entity/post';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 
-import * as styles from './PageList.css';
+import * as styles from './PostList.css';
 
 interface Props {
   recordMap: ExtendedRecordMap;
 }
 
-function PageList({ recordMap }: Props) {
+function PostList({ recordMap }: Props) {
   const postSummaries = NotionAdapter.getPostSummaries(recordMap);
   const publicPosts = postSummaries.filter((post) => PostEntity.isPublic(post.status));
 
@@ -39,4 +39,4 @@ function PageList({ recordMap }: Props) {
   );
 }
 
-export default PageList;
+export default PostList;

@@ -1,4 +1,4 @@
-import { Decoration, ExtendedRecordMap } from 'notion-types';
+import { ExtendedRecordMap } from 'notion-types';
 
 import { PostCategory, PostSummary } from '@/entity/post/type';
 
@@ -65,16 +65,6 @@ class NotionAdapter {
     });
   };
 
-  /**
-   * page id를 통해 page의 slug를 반환합니다.
-   */
-  static getPageIdBySlug = (recordMap: ExtendedRecordMap, slug: PostSummary['slug']) => {
-    const postSummaries = this.getPostSummaries(recordMap);
-    const currentPost = postSummaries.find((post) => post.slug === slug);
-
-    return currentPost?.id ?? '';
-  };
-
   static getCategoryList = (recordMap: ExtendedRecordMap): PostCategory[] => {
     const schema = this.getPostSchema(recordMap);
 
@@ -85,21 +75,21 @@ class NotionAdapter {
   };
 
   /**
-   * 글 제목을 반환합니다.
+   * page slug를 통해 post의 정보를 반환합니다.
    */
-  static getPageTitle(recordMap: ExtendedRecordMap) {
-    const pageInfoBlock = Object.values(recordMap.block)[0]?.value;
-    const titleBlock = pageInfoBlock.properties?.title;
+  static getPostSummaryBySlug = (
+    recordMap: ExtendedRecordMap,
+    slug: PostSummary['slug'],
+  ): PostSummary => {
+    const postSummaries = this.getPostSummaries(recordMap);
+    const matchedPostSummary = postSummaries.find((post) => post.slug === slug);
 
-    if (titleBlock && Array.isArray(titleBlock)) {
-      return (titleBlock as Decoration[])?.reduce(
-        (prev, current) => prev + (current[0] !== '⁍' && current[0] !== '‣' ? current[0] : ''),
-        '',
-      );
+    if (!matchedPostSummary) {
+      throw new Error(`${slug} 페이지 정보를 찾을 수 없음`);
     }
 
-    return '';
-  }
+    return matchedPostSummary;
+  };
 }
 
 export default NotionAdapter;

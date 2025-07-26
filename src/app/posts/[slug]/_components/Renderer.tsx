@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { ExtendedRecordMap } from 'notion-types';
 import { NotionRenderer } from 'react-notion-x';
 
+import * as styles from './Renderer.css';
+
 const Code = dynamic(() => import('./Blocks/Code'), { ssr: false });
 
 interface Props {
@@ -20,6 +22,7 @@ function Renderer({ recordMap }: Props) {
     <NotionRenderer
       recordMap={recordMap}
       components={{ Code, nextImage: Image, nextLink: Link, Collection: () => <></> }}
+      className={styles.renderer}
     />
   );
 }

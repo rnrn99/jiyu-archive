@@ -8,9 +8,10 @@ interface Props {
   color?: string;
   gap?: number;
   size?: number;
+  separator?: '|' | '•';
 }
 
-function TextDivider({ color, gap = 0, size }: Props) {
+function TextDivider({ separator = '|', color, gap = 0, size }: Props) {
   return (
     <span
       className={styles.textDivider}
@@ -22,7 +23,7 @@ function TextDivider({ color, gap = 0, size }: Props) {
         }),
       }}
     >
-      |
+      {separator}
     </span>
   );
 }

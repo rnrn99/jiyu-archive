@@ -10,10 +10,12 @@ import { PostCategory } from '@/entity/post/type';
 
 import { PostListPageSearchParamsKey } from '../page.types';
 
-type CategoryTab = '전체' | PostCategory;
+export const ALL_TAB = '전체' as const;
+
+type CategoryTab = typeof ALL_TAB | PostCategory;
 
 const isPostCategory = (tab: CategoryTab): tab is PostCategory => {
-  return tab !== '전체';
+  return tab !== ALL_TAB;
 };
 
 const SEARCH_PARAMS_KEY: PostListPageSearchParamsKey = 'category';
@@ -26,7 +28,7 @@ function CategoryTab({ list }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const tabList: CategoryTab[] = ['전체', ...list];
+  const tabList: CategoryTab[] = [ALL_TAB, ...list];
 
   const getUrl = (category: CategoryTab) => {
     const params = new URLSearchParams(searchParams);
@@ -41,9 +43,9 @@ function CategoryTab({ list }: Props) {
     return `${pathname}${queryString ? `?${queryString}` : ''}`;
   };
 
-  const getSelectedStatus = (category: CategoryTab) => {
+  const isSelectedCategory = (category: CategoryTab) => {
     const currentCategory = searchParams.get(SEARCH_PARAMS_KEY);
-    if (!currentCategory) return category === '전체';
+    if (!currentCategory) return category === ALL_TAB;
     return category === currentCategory;
   };
 
@@ -51,7 +53,11 @@ function CategoryTab({ list }: Props) {
     <Tab aria-label="카테고리 탭">
       {tabList.map((category) => (
         <Link key={category} replace href={getUrl(category)}>
-          <Tab.Button selected={getSelectedStatus(category)} aria-controls={`panel-${category}`}>
+          <Tab.Button
+            id={`tab-${category}`}
+            aria-controls={`panel-${category}`}
+            selected={isSelectedCategory(category)}
+          >
             {category}
           </Tab.Button>
         </Link>

@@ -9,6 +9,7 @@ import PostEntity from '@/entity/post';
 import { PostCategory, PostSummary } from '@/entity/post/type';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 
+import { ALL_TAB } from './CategoryTab';
 import * as styles from './PostList.css';
 
 const getPosts = (posts: PostSummary[], category?: PostCategory) => {
@@ -30,7 +31,7 @@ function PostList({ recordMap, category }: Props) {
   return (
     <article
       role="tabpanel"
-      aria-labelledby={`tab-${category ?? '전체'}`}
+      aria-labelledby={`tab-${category ?? ALL_TAB}`}
       className={styles.article}
     >
       <ul>

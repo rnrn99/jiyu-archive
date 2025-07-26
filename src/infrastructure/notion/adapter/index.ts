@@ -1,6 +1,6 @@
 import { Decoration, ExtendedRecordMap } from 'notion-types';
 
-import { PostSummary } from '@/entity/post/type';
+import { PostCategory, PostSummary } from '@/entity/post/type';
 
 class NotionAdapter {
   private static getPostIds = (recordMap: ExtendedRecordMap) => {
@@ -65,6 +65,28 @@ class NotionAdapter {
     });
   };
 
+  /**
+   * page id를 통해 page의 slug를 반환합니다.
+   */
+  static getPageIdBySlug = (recordMap: ExtendedRecordMap, slug: PostSummary['slug']) => {
+    const postSummaries = this.getPostSummaries(recordMap);
+    const currentPost = postSummaries.find((post) => post.slug === slug);
+
+    return currentPost?.id ?? '';
+  };
+
+  static getCategoryList = (recordMap: ExtendedRecordMap): PostCategory[] => {
+    const schema = this.getPostSchema(recordMap);
+
+    const categorySchema = Object.values(schema).find(({ name }) => name === 'category');
+    if (!categorySchema) return [];
+
+    return categorySchema?.options?.map(({ value }) => value) as PostCategory[];
+  };
+
+  /**
+   * 글 제목을 반환합니다.
+   */
   static getPageTitle(recordMap: ExtendedRecordMap) {
     const pageInfoBlock = Object.values(recordMap.block)[0]?.value;
     const titleBlock = pageInfoBlock.properties?.title;
@@ -78,13 +100,6 @@ class NotionAdapter {
 
     return '';
   }
-
-  static getPageIdBySlug = (recordMap: ExtendedRecordMap, slug: PostSummary['slug']) => {
-    const postSummaries = this.getPostSummaries(recordMap);
-    const currentPost = postSummaries.find((post) => post.slug === slug);
-
-    return currentPost?.id ?? '';
-  };
 }
 
 export default NotionAdapter;

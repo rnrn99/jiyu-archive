@@ -16,15 +16,17 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "import"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "import", "unused-imports"],
   "rules": {
     "react-hooks/exhaustive-deps": "error",
     "react/no-unescaped-entities": "error",
     "react/react-in-jsx-scope": "off",
     "no-alert": "off",
+    "unused-imports/no-unused-imports": "error",
     "@typescript-eslint/no-inferrable-types": "warn",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-empty-object-type": "off",
     "@typescript-eslint/naming-convention": [
       "warn",
       {

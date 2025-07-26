@@ -10,7 +10,7 @@ interface Props extends ComponentProps<'button'> {
 
 function TabButton({ selected, children }: Props) {
   return (
-    <button aria-label="tab" className={styles.tabButton[selected ? 'active' : 'inactive']}>
+    <button role="tab" className={styles.tabButton[selected ? 'active' : 'inactive']}>
       {children}
     </button>
   );

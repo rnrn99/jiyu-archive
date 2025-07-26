@@ -5,7 +5,7 @@ import TabButton from './TabButton';
 
 function Tab({ children }: PropsWithChildren) {
   return (
-    <div aria-label="tablist" className={styles.tabList}>
+    <div role="tablist" className={styles.tabList}>
       {children}
     </div>
   );

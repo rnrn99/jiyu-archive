@@ -1,17 +1,12 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
-export const article = style({
-  margin: '80px 0',
-});
+import { media } from '@/components/media.css';
 
-globalStyle(`${article} > main`, {
-  padding: 0,
-  margin: 0,
-  width: '100%',
-});
-
-export const title = style({
-  marginBottom: 32,
-  fontSize: 32,
-  letterSpacing: -0.8,
-});
+export const article = style([
+  {
+    padding: '20px',
+  },
+  media.desktop({
+    padding: '20px 0',
+  }),
+]);

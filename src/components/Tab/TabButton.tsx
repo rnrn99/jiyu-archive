@@ -8,9 +8,14 @@ interface Props extends ComponentProps<'button'> {
   selected: boolean;
 }
 
-function TabButton({ selected, children }: Props) {
+function TabButton({ selected, children, ...props }: Props) {
   return (
-    <button role="tab" className={styles.tabButton[selected ? 'active' : 'inactive']}>
+    <button
+      role="tab"
+      aria-selected={selected}
+      className={styles.tabButton[selected ? 'active' : 'inactive']}
+      {...props}
+    >
       {children}
     </button>
   );

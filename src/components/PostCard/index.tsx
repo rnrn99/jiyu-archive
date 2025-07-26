@@ -5,6 +5,7 @@ import { PostSummary } from '@/entity/post/type';
 import CategoryBadge from './CategoryBadge';
 import CategoryIcon from './CategoryIcon';
 import * as styles from './index.css';
+import HashTag from '../HashTag';
 
 const getFormattedWrittenDate = (date: Date) => {
   const year = date.getFullYear();
@@ -17,9 +18,10 @@ interface Props {
   description: PostSummary['description'];
   category: PostSummary['category'];
   written: PostSummary['written'];
+  tag?: PostSummary['tag'];
 }
 
-function PostCard({ title, description, written, category }: Props) {
+function PostCard({ title, description, written, category, tag }: Props) {
   return (
     <article className={styles.postCard}>
       <div className={styles.header}>
@@ -30,6 +32,7 @@ function PostCard({ title, description, written, category }: Props) {
       <p className={styles.description}>{description}</p>
       <div className={styles.postSummaryWrapper}>
         <CategoryBadge category={category} />
+        {!!tag?.length && tag.map((t) => <HashTag key={t}>{t}</HashTag>)}
       </div>
     </article>
   );

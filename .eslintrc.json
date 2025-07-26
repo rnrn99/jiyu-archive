@@ -25,6 +25,7 @@
     "@typescript-eslint/no-inferrable-types": "warn",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-empty-object-type": "off",
     "@typescript-eslint/naming-convention": [
       "warn",
       {

@@ -51,7 +51,9 @@ function CategoryTab({ list }: Props) {
     <Tab aria-label="카테고리 탭">
       {tabList.map((category) => (
         <Link key={category} replace href={getUrl(category)}>
-          <Tab.Button selected={getSelectedStatus(category)}>{category}</Tab.Button>
+          <Tab.Button selected={getSelectedStatus(category)} aria-controls={`panel-${category}`}>
+            {category}
+          </Tab.Button>
         </Link>
       ))}
     </Tab>

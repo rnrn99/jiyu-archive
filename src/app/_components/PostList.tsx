@@ -28,7 +28,11 @@ function PostList({ recordMap, category }: Props) {
   const posts = getPosts(postSummaries, category);
 
   return (
-    <article className={styles.article}>
+    <article
+      role="tabpanel"
+      aria-labelledby={`tab-${category ?? '전체'}`}
+      className={styles.article}
+    >
       <ul>
         {posts?.map(({ id, title, description, written, slug, category, tag }) => (
           <li key={id} className={styles.listItem}>

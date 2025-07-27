@@ -1,5 +1,7 @@
 import React from 'react';
 
+import dynamic from 'next/dynamic';
+
 import { PostSummary } from '@/entity/post/type';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 import { notion } from '@/infrastructure/notion/adapter/api';
@@ -7,6 +9,8 @@ import { notion } from '@/infrastructure/notion/adapter/api';
 import PostHeader from './_components/PostHeader';
 import Renderer from './_components/Renderer';
 import * as styles from './page.css';
+
+const PostFooter = dynamic(() => import('./_components/PostFooter'));
 
 interface PostPageParams {
   slug: PostSummary['slug'];
@@ -17,6 +21,7 @@ async function PostPage({ params }: { params: Promise<PostPageParams> }) {
 
   const recordMap = await notion.getPageData(process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string);
   const postSummary = NotionAdapter.getPostSummaryBySlug(recordMap, slug);
+  const hasPostFooter = postSummary?.tag && postSummary?.tag.length > 0;
 
   const result = await notion.getPageData(postSummary.id);
 
@@ -28,6 +33,7 @@ async function PostPage({ params }: { params: Promise<PostPageParams> }) {
         written={postSummary.written}
       />
       <Renderer recordMap={result} />
+      {hasPostFooter && <PostFooter tag={postSummary.tag} />}
     </article>
   );
 }

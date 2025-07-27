@@ -2,7 +2,7 @@ import React from 'react';
 
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
-import * as styles from './TextDivider.css';
+import * as styles from './SeparatorDivider.css';
 
 interface Props {
   color?: string;
@@ -11,12 +11,12 @@ interface Props {
   separator?: '|' | '•';
 }
 
-function TextDivider({ separator = '|', color, gap = 0, size }: Props) {
+function SeparatorDivider({ separator = '|', color, gap = 0, size }: Props) {
   return (
     <span
-      className={styles.textDivider}
+      className={styles.separatorDivider}
       style={{
-        ...assignInlineVars(styles.textDividerVars, {
+        ...assignInlineVars(styles.separatorDividerVars, {
           color: color ?? 'inherit',
           gap: `${gap}px`,
           size: size ? `${size}px` : 'inherit',
@@ -28,4 +28,4 @@ function TextDivider({ separator = '|', color, gap = 0, size }: Props) {
   );
 }
 
-export default TextDivider;
+export default SeparatorDivider;

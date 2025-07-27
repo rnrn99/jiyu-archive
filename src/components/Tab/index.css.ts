@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import { media } from '../media.css';
+import { responsiveStyle } from '../media.css';
 
 export const tabList = style([
   {
@@ -11,12 +11,8 @@ export const tabList = style([
     flexWrap: 'wrap',
     padding: '14px 0',
   },
-  media.tablet({
-    columnGap: 24,
-    padding: '16px 0',
-  }),
-  media.desktop({
-    columnGap: 32,
-    padding: '20px 0',
+  responsiveStyle({
+    tablet: { columnGap: 24, padding: '16px 0' },
+    desktop: { columnGap: 32, padding: '20px 0' },
   }),
 ]);

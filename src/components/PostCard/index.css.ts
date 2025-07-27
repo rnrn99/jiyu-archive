@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import { media } from '../media.css';
+import { responsiveStyle } from '../media.css';
 
 export const postCard = style([
   {
@@ -8,11 +8,9 @@ export const postCard = style([
     borderRadius: 12,
     padding: 20,
   },
-  media.tablet({
-    padding: 24,
-  }),
-  media.desktop({
-    padding: 32,
+  responsiveStyle({
+    tablet: { padding: 24 },
+    desktop: { padding: 32 },
   }),
 ]);
 
@@ -23,9 +21,8 @@ export const header = style([
     columnGap: 12,
     marginBottom: 12,
   },
-  media.tablet({
-    columnGap: 16,
-    marginBottom: 16,
+  responsiveStyle({
+    tablet: { columnGap: 16, marginBottom: 16 },
   }),
 ]);
 
@@ -44,12 +41,9 @@ export const title = style([
     color: '#1a1a1a',
     wordBreak: 'keep-all',
   },
-  media.tablet({
-    marginBottom: 12,
-    fontSize: 20,
-  }),
-  media.desktop({
-    fontSize: 22,
+  responsiveStyle({
+    tablet: { marginBottom: 12, fontSize: 20 },
+    desktop: { fontSize: 22 },
   }),
 ]);
 
@@ -59,9 +53,11 @@ export const description = style([
     lineHeight: 1.4,
     color: '#666666',
   },
-  media.tablet({
-    fontSize: 16,
-    lineHeight: 1.6,
+  responsiveStyle({
+    tablet: {
+      fontSize: 16,
+      lineHeight: 1.6,
+    },
   }),
 ]);
 

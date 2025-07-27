@@ -1,6 +1,6 @@
 import { ComplexStyleRule, style, styleVariants } from '@vanilla-extract/css';
 
-import { media } from '../media.css';
+import { responsiveStyle } from '../media.css';
 
 const base = style([
   {
@@ -11,8 +11,8 @@ const base = style([
     fontSize: '12px',
     cursor: 'pointer',
   },
-  media.tablet({
-    fontSize: '14px',
+  responsiveStyle({
+    tablet: { fontSize: '14px' },
   }),
 ]);
 

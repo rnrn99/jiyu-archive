@@ -2,7 +2,7 @@ import { style, styleVariants } from '@vanilla-extract/css';
 
 import { PostCategory } from '@/entity/post/type';
 
-import { media } from '../media.css';
+import { responsiveStyle } from '../media.css';
 
 const base = style([
   {
@@ -16,15 +16,9 @@ const base = style([
     height: 36,
     fontSize: 18,
   },
-  media.tablet({
-    width: 40,
-    height: 40,
-    fontSize: 20,
-  }),
-  media.desktop({
-    width: 44,
-    height: 44,
-    fontSize: 22,
+  responsiveStyle({
+    tablet: { width: 40, height: 40, fontSize: 20 },
+    desktop: { width: 44, height: 44, fontSize: 22 },
   }),
 ]);
 

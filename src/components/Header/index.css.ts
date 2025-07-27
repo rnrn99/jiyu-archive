@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import { media } from '../media.css';
+import { responsiveStyle } from '../media.css';
 
 export const header = style({
   width: '100%',
@@ -24,11 +24,13 @@ export const container = style([
     margin: '0 auto',
     padding: '0 16px',
   },
-  media.tablet({
-    flexDirection: 'row',
-    alignItems: 'center',
+  responsiveStyle({
+    tablet: {
+      flexDirection: 'row',
+      alignItems: 'center',
 
-    padding: '0 20px',
+      padding: '0 20px',
+    },
   }),
 ]);
 

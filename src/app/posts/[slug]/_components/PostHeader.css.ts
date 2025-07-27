@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import { media } from '@/components/media.css';
+import { responsiveStyle } from '@/components/media.css';
 
 export const header = style({
   margin: '40px auto',
@@ -25,10 +25,10 @@ export const title = style([
     lineHeight: 1.3,
     color: '#1a1a1a',
   },
-  media.tablet({
-    fontSize: '28px',
-  }),
-  media.desktop({
-    fontSize: '36px',
+  responsiveStyle({
+    tablet: { fontSize: '28px' },
+    desktop: {
+      fontSize: '36px',
+    },
   }),
 ]);

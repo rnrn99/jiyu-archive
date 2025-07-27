@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import { media } from '../media.css';
+import { responsiveStyle } from '../media.css';
 
 export const hashTag = style([
   {
@@ -12,9 +12,11 @@ export const hashTag = style([
     color: '#666666',
     whiteSpace: 'nowrap',
   },
-  media.tablet({
-    padding: '3px 6px',
-    borderRadius: '4px',
-    fontSize: '12px',
+  responsiveStyle({
+    tablet: {
+      padding: '3px 6px',
+      borderRadius: '4px',
+      fontSize: '12px',
+    },
   }),
 ]);

@@ -1,16 +1,14 @@
-import { style, StyleRule } from '@vanilla-extract/css';
+import { StyleRule } from '@vanilla-extract/css';
 
-export const media = {
-  tablet: (styles: StyleRule) =>
-    style({
-      '@media': {
-        '(min-width: 481px)': { ...styles },
-      },
-    }),
-  desktop: (styles: StyleRule) =>
-    style({
-      '@media': {
-        '(min-width: 769px)': { ...styles },
-      },
-    }),
-};
+export const responsiveStyle = ({
+  tablet,
+  desktop,
+}: {
+  tablet?: StyleRule;
+  desktop?: StyleRule;
+}) => ({
+  '@media': {
+    ...(tablet && { '(min-width: 481px)': tablet }),
+    ...(desktop && { '(min-width: 769px)': desktop }),
+  },
+});

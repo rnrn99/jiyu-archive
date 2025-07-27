@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 import { responsiveStyle } from '@/components/media.css';
 
 export const header = style({
-  margin: '40px auto',
+  margin: '40px auto 20px',
 });
 
 export const postMetaWrapper = style({

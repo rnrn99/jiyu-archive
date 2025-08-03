@@ -24,7 +24,7 @@ const base = style([
 
 const BG_COLOR_BY_CATEGORY: Record<PostCategory, string> = {
   css: 'linear-gradient(135deg, #74b9ff, #0984e3)',
-  html: 'linear-gradient(135deg, #ff6b6b, #ee5a24)',
+  web: 'linear-gradient(135deg, #ff6b6b, #ee5a24)',
   react: 'linear-gradient(135deg, #667eea, #764ba2)',
   'react native': 'linear-gradient(135deg, #4ecdc4, #44a08d)',
   typescript: 'linear-gradient(135deg, #fd79a8, #e84393)',

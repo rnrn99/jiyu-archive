@@ -7,7 +7,7 @@ import * as styles from './CategoryIcon.css';
 const EMOJI_BY_CATEGORY: Record<PostCategory, string> = {
   css: '🎨',
   etc: '📝',
-  html: '🔮',
+  web: '🔮',
   react: '⚛️',
   'react native': '📱',
   typescript: '💎',

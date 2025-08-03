@@ -5,7 +5,7 @@ import { PostCategory } from '@/entity/post/type';
 import Badge, { BadgeProps } from '../Badge';
 
 const STYLES_BY_CATEGORY: Record<PostCategory, BadgeProps> = {
-  html: {
+  web: {
     backgroundColor: '#fff5f5',
     color: '#c53030',
     borderColor: '#feb2b2',

@@ -6,6 +6,7 @@ import { PostSummary } from '@/entity/post/type';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 import { notion } from '@/infrastructure/notion/adapter/api';
 
+import BackButton from './_components/BackButton';
 import PostHeader from './_components/PostHeader';
 import Renderer from './_components/Renderer';
 import * as styles from './page.css';
@@ -26,15 +27,18 @@ async function PostPage({ params }: { params: Promise<PostPageParams> }) {
   const result = await notion.getPageData(postSummary.id);
 
   return (
-    <article className={styles.article}>
-      <PostHeader
-        title={postSummary.title}
-        category={postSummary.category}
-        written={postSummary.written}
-      />
-      <Renderer recordMap={result} />
-      {hasPostFooter && <PostFooter tag={postSummary.tag} />}
-    </article>
+    <>
+      <BackButton />
+      <article className={styles.article}>
+        <PostHeader
+          title={postSummary.title}
+          category={postSummary.category}
+          written={postSummary.written}
+        />
+        <Renderer recordMap={result} />
+        {hasPostFooter && <PostFooter tag={postSummary.tag} />}
+      </article>
+    </>
   );
 }
 

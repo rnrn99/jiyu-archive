@@ -1,11 +1,19 @@
 import 'katex/dist/katex.min.css';
 
+import { Metadata } from 'next';
+
+import SiteFeature from '@/feature/site';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 import { notion } from '@/infrastructure/notion/adapter/api';
 
 import CategoryTab from './_components/CategoryTab';
 import PostList from './_components/PostList';
 import { PostListPageSearchParams } from './page.types';
+
+export const metadata: Metadata = {
+  title: SiteFeature.TITLE,
+  description: SiteFeature.DESCRIPTION,
+};
 
 interface PostListPageProps {
   searchParams: Promise<PostListPageSearchParams>;

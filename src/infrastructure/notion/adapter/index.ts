@@ -2,6 +2,8 @@ import { ExtendedRecordMap } from 'notion-types';
 
 import { PostCategory, PostSummary } from '@/entity/post/type';
 
+import { notion } from './api';
+
 class NotionAdapter {
   private static getPostIds = (recordMap: ExtendedRecordMap) => {
     const collectionQuery = Object.values(recordMap.collection_query)[0];
@@ -77,10 +79,11 @@ class NotionAdapter {
   /**
    * page slug를 통해 post의 정보를 반환합니다.
    */
-  static getPostSummaryBySlug = (
-    recordMap: ExtendedRecordMap,
-    slug: PostSummary['slug'],
-  ): PostSummary => {
+  static getPostSummaryBySlug = async (slug: PostSummary['slug']): Promise<PostSummary> => {
+    const recordMap = await notion.getPageData(
+      process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string,
+    );
+
     const postSummaries = this.getPostSummaries(recordMap);
     const matchedPostSummary = postSummaries.find((post) => post.slug === slug);
 

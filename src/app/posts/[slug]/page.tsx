@@ -18,10 +18,9 @@ interface PostPageParams {
   slug: PostSummary['slug'];
 }
 
-const getPostSummary = cache(async (slug: PostSummary['slug']) => {
-  const recordMap = await notion.getPageData(process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string);
-  return NotionAdapter.getPostSummaryBySlug(recordMap, slug);
-});
+const getPostSummary = cache(
+  async (slug: PostSummary['slug']) => await NotionAdapter.getPostSummaryBySlug(slug),
+);
 
 export async function generateMetadata({ params }: { params: Promise<PostPageParams> }) {
   const { slug } = await params;

@@ -64,7 +64,7 @@ const styles: Record<string, CSSProperties> = {
   title: {
     fontSize: '72px',
     fontWeight: 900,
-    letterSpacing: -0.8,
+    letterSpacing: '-0.8px',
     color: '#1a1a1a',
     textAlign: 'center',
     wordBreak: 'keep-all',

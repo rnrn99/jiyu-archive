@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { cache } from 'react';
 
 import dynamic from 'next/dynamic';
 
 import { PostSummary } from '@/entity/post/type';
+import SiteFeature from '@/feature/site';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 import { notion } from '@/infrastructure/notion/adapter/api';
 
@@ -17,11 +18,25 @@ interface PostPageParams {
   slug: PostSummary['slug'];
 }
 
+const getPostSummary = cache(
+  async (slug: PostSummary['slug']) => await NotionAdapter.getPostSummaryBySlug(slug),
+);
+
+export async function generateMetadata({ params }: { params: Promise<PostPageParams> }) {
+  const { slug } = await params;
+
+  const postSummary = await getPostSummary(slug);
+
+  return {
+    title: `${postSummary.title} | ${SiteFeature.TITLE}`,
+    description: postSummary.description,
+  };
+}
+
 async function PostPage({ params }: { params: Promise<PostPageParams> }) {
   const { slug } = await params;
 
-  const recordMap = await notion.getPageData(process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string);
-  const postSummary = NotionAdapter.getPostSummaryBySlug(recordMap, slug);
+  const postSummary = await getPostSummary(slug);
   const hasPostFooter = postSummary?.tag && postSummary?.tag.length > 0;
 
   const result = await notion.getPageData(postSummary.id);

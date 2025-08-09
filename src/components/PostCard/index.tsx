@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PostFeature from '@/app/feature/post';
 import { PostSummary } from '@/entity/post/type';
+import PostFeature from '@/feature/post';
 
 import CategoryBadge from './CategoryBadge';
 import CategoryIcon from './CategoryIcon';

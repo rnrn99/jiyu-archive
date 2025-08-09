@@ -1,9 +1,9 @@
 import React from 'react';
 
-import PostFeature from '@/app/feature/post';
 import SeparatorDivider from '@/components/Divider/SeparatorDivider';
 import CategoryBadge from '@/components/PostCard/CategoryBadge';
 import { PostCategory } from '@/entity/post/type';
+import PostFeature from '@/feature/post';
 
 import * as styles from './PostHeader.css';
 

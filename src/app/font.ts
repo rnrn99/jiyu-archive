@@ -1,7 +1,7 @@
 import { Noto_Sans_KR, Nanum_Gothic_Coding } from 'next/font/google';
 
 export const notoSansKr = Noto_Sans_KR({
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-noto-sans',

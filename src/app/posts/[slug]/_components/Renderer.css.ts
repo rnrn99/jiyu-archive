@@ -39,3 +39,7 @@ globalStyle(`${renderer} .notion-inline-code`, {
   backgroundColor: '#f8f9fa',
   color: '#1a1a1a',
 });
+
+globalStyle(`${renderer} .notion-link-mention > a`, {
+  textDecoration: 'none',
+});

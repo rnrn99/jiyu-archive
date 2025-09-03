@@ -4,6 +4,7 @@ import '../styles/font.css';
 
 import type { Metadata } from 'next';
 
+import { Analytics } from '@vercel/analytics/next';
 import clsx from 'clsx';
 
 import Header from '@/components/Header';
@@ -31,6 +32,7 @@ export default function RootLayout({
       </head>
       <body>
         <Layout top={<Header />}>{children}</Layout>
+        <Analytics />
       </body>
     </html>
   );

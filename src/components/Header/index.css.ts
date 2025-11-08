@@ -7,7 +7,6 @@ export const header = style({
 
   padding: '24px 0',
 
-  backgroundColor: '#fff',
   borderBottom: '1px solid #e0e0e0',
 });
 

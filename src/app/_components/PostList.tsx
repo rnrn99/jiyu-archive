@@ -4,13 +4,13 @@ import Link from 'next/link';
 
 import { ExtendedRecordMap } from 'notion-types';
 
-import PostCard from '@/components/PostCard';
 import PostEntity from '@/entity/post';
 import { PostCategory, PostSummary } from '@/entity/post/type';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 
 import { ALL_TAB } from './CategoryTab';
 import * as styles from './PostList.css';
+import PostListItem from './PostListItem';
 
 const getPosts = (posts: PostSummary[], category?: PostCategory) => {
   const isPublicPost = (post: PostSummary) => PostEntity.isPublic(post.status);
@@ -35,16 +35,10 @@ function PostList({ recordMap, category }: Props) {
       className={styles.article}
     >
       <ul>
-        {posts?.map(({ id, title, description, written, slug, category, tag }) => (
+        {posts?.map(({ id, title, written, slug, category }) => (
           <li key={id} className={styles.listItem}>
             <Link href={`/posts/${slug}`} className={styles.link}>
-              <PostCard
-                title={title}
-                description={description}
-                written={written}
-                category={category}
-                tag={tag}
-              />
+              <PostListItem title={title} category={category} written={written} />
             </Link>
           </li>
         ))}

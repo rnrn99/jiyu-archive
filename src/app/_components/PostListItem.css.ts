@@ -5,7 +5,6 @@ import { responsiveStyle } from '@/components/media.css';
 export const postListItem = style([
   {
     padding: '24px 0',
-    borderBottom: '1px solid #e0e0e0',
   },
   responsiveStyle({
     tablet: { padding: '26px 0' },
@@ -47,7 +46,7 @@ export const divider = style({
 
 export const category = style([
   {
-    flex: '0 0 auto',
+    flex: '0 0 1',
     fontSize: '12px',
     fontWeight: 400,
     whiteSpace: 'nowrap',

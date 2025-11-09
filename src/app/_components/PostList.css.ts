@@ -7,7 +7,7 @@ export const article = style({
 export const listItem = style({
   selectors: {
     '&:not(:last-of-type)': {
-      marginBottom: 20,
+      borderBottom: '1px solid #e0e0e0',
     },
   },
 });

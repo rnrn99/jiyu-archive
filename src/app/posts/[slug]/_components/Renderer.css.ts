@@ -7,6 +7,10 @@ export const renderer = style({
   padding: 0,
 });
 
+/**
+ * ======== Typography ========
+ */
+
 globalStyle(`${renderer} h2`, {
   margin: '40px 0 18px',
 
@@ -62,6 +66,10 @@ globalStyle(`${renderer} .notion-text`, {
   }),
 });
 
+/**
+ * ======== Inline Code ========
+ */
+
 globalStyle(`${renderer} .notion-inline-code`, {
   padding: '2px 6px',
   borderRadius: '4px',
@@ -80,6 +88,36 @@ globalStyle(`${renderer} .notion-inline-code::after`, {
   content: '"`"',
 });
 
+/**
+ * ======== Link ========
+ */
+
 globalStyle(`${renderer} .notion-link-mention > a`, {
   textDecoration: 'none',
+});
+
+/**
+ * ======== Table ========
+ */
+
+globalStyle(`${renderer} table`, {
+  fontSize: '15px',
+  border: 'none',
+  borderCollapse: 'collapse',
+  borderRadius: '8px',
+  overflow: 'hidden',
+});
+
+globalStyle(`${renderer} tr.notion-simple-table-header-row`, {
+  backgroundColor: '#f8f8f8',
+  fontWeight: 500,
+  color: '#1a1a1a',
+});
+
+globalStyle(`${renderer} td`, {
+  padding: '12px',
+  border: 'none',
+  borderBottom: '1px solid #e5e5e5',
+  verticalAlign: 'middle',
+  textAlign: 'center',
 });

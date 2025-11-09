@@ -1,6 +1,5 @@
 import 'react-notion-x/src/styles.css';
 import '../styles/globals.css';
-import '../styles/font.css';
 
 import type { Metadata } from 'next';
 

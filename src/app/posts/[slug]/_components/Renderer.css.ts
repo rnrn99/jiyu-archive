@@ -8,7 +8,21 @@ export const renderer = style({
 });
 
 globalStyle(`${renderer} h2`, {
-  margin: '20px 0',
+  margin: '40px 0 18px',
+
+  fontSize: '24px',
+  fontWeight: 600,
+  lineHeight: 1.4,
+  color: '#1a1a1a',
+
+  ...responsiveStyle({
+    tablet: { fontSize: '26px' },
+    desktop: { fontSize: '28px', margin: '48px 0 20px' },
+  }),
+});
+
+globalStyle(`${renderer} h3`, {
+  margin: '28px 0 12px',
 
   fontSize: '20px',
   fontWeight: 600,
@@ -16,28 +30,54 @@ globalStyle(`${renderer} h2`, {
   lineHeight: 1.4,
 
   ...responsiveStyle({
-    tablet: { fontSize: '24px' },
-    desktop: { fontSize: '28px' },
+    tablet: { fontSize: '22px' },
+    desktop: { fontSize: '24px', margin: '36px 0 16px' },
   }),
 });
 
-globalStyle(`${renderer} h3`, {
-  margin: '16px 0',
+globalStyle(`${renderer} h4`, {
+  margin: '20px 0 8px',
 
-  fontSize: '18px',
+  fontSize: '17px',
   fontWeight: 600,
   color: '#1a1a1a',
   lineHeight: 1.4,
 
   ...responsiveStyle({
-    tablet: { fontSize: '20px' },
-    desktop: { fontSize: '22px' },
+    tablet: { fontSize: '18px' },
+    desktop: { fontSize: '20px', margin: '24px 0 10px' },
+  }),
+});
+
+globalStyle(`${renderer} .notion-text`, {
+  fontSize: '16px',
+  fontWeight: 400,
+  lineHeight: 1.8,
+  color: '#333333',
+  wordBreak: 'keep-all',
+
+  ...responsiveStyle({
+    tablet: { fontSize: '16px' },
+    desktop: { fontSize: '17px' },
   }),
 });
 
 globalStyle(`${renderer} .notion-inline-code`, {
-  backgroundColor: '#f8f9fa',
-  color: '#1a1a1a',
+  padding: '2px 6px',
+  borderRadius: '4px',
+  backgroundColor: '#f5f5f5',
+  color: '#FC4E00',
+
+  fontFamily: "'Monaco', 'Courier New', monospace",
+  fontSize: '14px',
+});
+
+globalStyle(`${renderer} .notion-inline-code::before`, {
+  content: '"`"',
+});
+
+globalStyle(`${renderer} .notion-inline-code::after`, {
+  content: '"`"',
 });
 
 globalStyle(`${renderer} .notion-link-mention > a`, {

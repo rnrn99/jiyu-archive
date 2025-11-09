@@ -10,7 +10,17 @@ function BackButton() {
   const router = useRouter();
 
   const handleClick = () => {
-    router.back();
+    if (window.history.length > 1 && document.referrer) {
+      const referrerUrl = new URL(document.referrer);
+      const currentUrl = new URL(window.location.href);
+
+      if (referrerUrl.origin === currentUrl.origin) {
+        router.back();
+        return;
+      }
+    }
+
+    router.push('/');
   };
 
   return (

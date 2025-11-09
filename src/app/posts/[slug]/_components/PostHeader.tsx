@@ -1,7 +1,7 @@
 import React from 'react';
 
+import HorizontalDivider from '@/components/Divider/HorizontalDivider';
 import SeparatorDivider from '@/components/Divider/SeparatorDivider';
-import CategoryBadge from '@/components/PostCard/CategoryBadge';
 import { PostCategory } from '@/entity/post/type';
 import PostFeature from '@/feature/post';
 
@@ -17,11 +17,12 @@ function PostHeader({ title, category, written }: Props) {
   return (
     <div className={styles.header}>
       <div className={styles.postMetaWrapper}>
-        <CategoryBadge category={category} />
-        <SeparatorDivider separator="•" color="#999999" />
+        <span className={styles.category}>{category}</span>
+        <SeparatorDivider separator="|" color="#d0d0d0" size={12} />
         <time className={styles.written}>{PostFeature.getFormattedWrittenDate(written)}</time>
       </div>
       <h1 className={styles.title}>{title}</h1>
+      <HorizontalDivider className={styles.divider} />
     </div>
   );
 }

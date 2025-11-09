@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { ExtendedRecordMap } from 'notion-types';
 
+import HorizontalDivider from '@/components/Divider/HorizontalDivider';
 import PostEntity from '@/entity/post';
 import { PostCategory, PostSummary } from '@/entity/post/type';
 import NotionAdapter from '@/infrastructure/notion/adapter';
@@ -36,10 +37,11 @@ function PostList({ recordMap, category }: Props) {
     >
       <ul>
         {posts?.map(({ id, title, written, slug, category }) => (
-          <li key={id} className={styles.listItem}>
+          <li key={id}>
             <Link href={`/posts/${slug}`} className={styles.link}>
               <PostListItem title={title} category={category} written={written} />
             </Link>
+            <HorizontalDivider />
           </li>
         ))}
       </ul>

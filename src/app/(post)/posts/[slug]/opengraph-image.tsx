@@ -6,6 +6,8 @@ import PostFeature from '@/feature/post';
 import SiteFeature from '@/feature/site';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 
+import { PostPageParams } from './page.types';
+
 export const size = {
   width: 1200,
   height: 630,
@@ -13,8 +15,9 @@ export const size = {
 
 export const contentType = 'image/png';
 
-export default async function Image({ params }: { params: { slug: string } }) {
-  const post = await NotionAdapter.getPostSummaryBySlug(params.slug);
+export default async function Image({ params }: { params: Promise<PostPageParams> }) {
+  const { slug } = await params;
+  const post = await NotionAdapter.getPostSummaryBySlug(slug);
 
   return new ImageResponse(
     (

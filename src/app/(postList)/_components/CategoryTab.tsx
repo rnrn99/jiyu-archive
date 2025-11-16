@@ -3,12 +3,9 @@
 import React from 'react';
 
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
 
 import Tab from '@/components/Tab';
 import { PostCategory } from '@/entity/post/type';
-
-import { PostListPageSearchParamsKey } from '../page.types';
 
 export const ALL_TAB = '전체' as const;
 
@@ -18,33 +15,19 @@ const isPostCategory = (tab: CategoryTab): tab is PostCategory => {
   return tab !== ALL_TAB;
 };
 
-const SEARCH_PARAMS_KEY: PostListPageSearchParamsKey = 'category';
-
 interface Props {
   list: PostCategory[];
+  currentCategory?: PostCategory;
 }
 
-function CategoryTab({ list }: Props) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
+function CategoryTab({ list, currentCategory }: Props) {
   const tabList: CategoryTab[] = [ALL_TAB, ...list];
 
   const getUrl = (category: CategoryTab) => {
-    const params = new URLSearchParams(searchParams);
-
-    if (!isPostCategory(category)) {
-      params.delete(SEARCH_PARAMS_KEY);
-    } else {
-      params.set(SEARCH_PARAMS_KEY, category);
-    }
-
-    const queryString = params.toString();
-    return `${pathname}${queryString ? `?${queryString}` : ''}`;
+    return isPostCategory(category) ? `/category/${category}` : '/';
   };
 
   const isSelectedCategory = (category: CategoryTab) => {
-    const currentCategory = searchParams.get(SEARCH_PARAMS_KEY);
     if (!currentCategory) return category === ALL_TAB;
     return category === currentCategory;
   };

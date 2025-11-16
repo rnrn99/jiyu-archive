@@ -5,6 +5,8 @@ import SiteFeature from '@/feature/site';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 import { notion } from '@/infrastructure/notion/adapter/api';
 
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const recordMap = await notion.getPageData(process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string);
   const postSummaries = NotionAdapter.getPostSummaries(recordMap).filter((post) =>

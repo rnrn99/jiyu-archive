@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<PostPagePar
   const postSummary = await getPostSummary(slug);
 
   return {
-    title: `${postSummary.title} | ${SiteFeature.TITLE}`,
+    title: SiteFeature.getMetaTitle(postSummary.title),
     description: postSummary.description,
   };
 }

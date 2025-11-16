@@ -3,6 +3,7 @@ import { cache } from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import { PostCategory } from '@/entity/post/type';
 import SiteFeature from '@/feature/site';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 import { notion } from '@/infrastructure/notion/adapter/api';
@@ -41,7 +42,8 @@ export default async function CategoryPage({ params }: Props) {
   const recordMap = await getPageData();
   const categoryList = NotionAdapter.getCategoryList(recordMap);
 
-  const { category } = await params;
+  const { category: rawCategory } = await params;
+  const category = decodeURIComponent(rawCategory).trim() as PostCategory;
 
   if (!categoryList.includes(category)) {
     notFound();

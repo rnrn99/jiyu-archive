@@ -1,26 +1,32 @@
 import React, { cache } from 'react';
 
-import dynamic from 'next/dynamic';
-
+import PostEntity from '@/entity/post';
 import { PostSummary } from '@/entity/post/type';
 import SiteFeature from '@/feature/site';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 import { notion } from '@/infrastructure/notion/adapter/api';
 
 import BackButton from './_components/BackButton';
+import PostFooter from './_components/PostFooter';
 import PostHeader from './_components/PostHeader';
 import Renderer from './_components/Renderer';
 import * as styles from './page.css';
-
-const PostFooter = dynamic(() => import('./_components/PostFooter'));
-
-interface PostPageParams {
-  slug: PostSummary['slug'];
-}
+import { PostPageParams } from './page.types';
 
 const getPostSummary = cache(
   async (slug: PostSummary['slug']) => await NotionAdapter.getPostSummaryBySlug(slug),
 );
+
+export async function generateStaticParams() {
+  const recordMap = await notion.getPageData(process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string);
+  const postSummaries = NotionAdapter.getPostSummaries(recordMap);
+
+  return postSummaries
+    .filter((post) => PostEntity.isPublic(post.status))
+    .map((post) => ({
+      slug: post.slug,
+    }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<PostPageParams> }) {
   const { slug } = await params;

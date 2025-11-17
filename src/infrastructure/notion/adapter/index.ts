@@ -1,6 +1,6 @@
 import { ExtendedRecordMap } from 'notion-types';
 
-import { PostCategory, PostSummary } from '@/entity/post/type';
+import { PostCategory, PostSummary, TableOfContentsItem } from '@/entity/post/type';
 
 import { notion } from './api';
 
@@ -92,6 +92,49 @@ class NotionAdapter {
     }
 
     return matchedPostSummary;
+  };
+
+  /**
+   * 글의 h2, h3, h4 요소 정보를 반환합니다.
+   */
+  static getHeadingList = (recordMap: ExtendedRecordMap): TableOfContentsItem[] => {
+    const blockMap = recordMap.block;
+    const result: TableOfContentsItem[] = [];
+
+    Object.entries(blockMap).forEach(([id, block]) => {
+      const blockValue = block.value;
+      const blockType = blockValue?.type;
+
+      if (!blockValue || !blockType) return;
+
+      let level: TableOfContentsItem['level'] | null = null;
+
+      switch (blockType) {
+        case 'header':
+          level = '2';
+          break;
+        case 'sub_header':
+          level = '3';
+          break;
+        case 'sub_sub_header':
+          level = '4';
+          break;
+        default:
+          return;
+      }
+
+      const title = blockValue?.properties?.title?.map((part) => part[0]).join('');
+
+      if (title) {
+        result.push({
+          blockId: id,
+          level,
+          title,
+        });
+      }
+    });
+
+    return result;
   };
 }
 

@@ -10,6 +10,7 @@ import BackButton from './_components/BackButton';
 import PostFooter from './_components/PostFooter';
 import PostHeader from './_components/PostHeader';
 import Renderer from './_components/Renderer';
+import TableOfContents from './_components/TableOfContents';
 import * as styles from './page.css';
 import { PostPageParams } from './page.types';
 
@@ -50,6 +51,7 @@ async function PostPage({ params }: { params: Promise<PostPageParams> }) {
   return (
     <>
       <BackButton />
+
       <article className={styles.article}>
         <PostHeader
           title={postSummary.title}
@@ -59,6 +61,8 @@ async function PostPage({ params }: { params: Promise<PostPageParams> }) {
         <Renderer recordMap={result} />
         {hasPostFooter && <PostFooter tag={postSummary.tag} />}
       </article>
+
+      <TableOfContents recordMap={result} />
     </>
   );
 }

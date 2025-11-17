@@ -9,7 +9,7 @@ import NotionAdapter from '@/infrastructure/notion/adapter';
 
 import * as styles from './TableOfContents.css';
 
-const MIN_WIDTH_TO_SHOW_TOC = 1200;
+const MIN_WIDTH_TO_SHOW_TOC = 1280;
 
 const TARGET_ATTRIBUTE = 'data-id';
 const convertToIdFormat = (blockId: TableOfContentsItem['blockId']) => blockId.replaceAll('-', '');

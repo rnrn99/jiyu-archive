@@ -9,7 +9,7 @@ export const nav = style([
   responsiveStyle({
     desktop: {
       position: 'fixed',
-      bottom: '20px',
+      top: '300px',
       right: '20px',
       display: 'block',
       maxWidth: '250px',

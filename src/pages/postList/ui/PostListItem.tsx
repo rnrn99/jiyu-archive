@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PostSummary } from '@/entity/post/type';
+import { PostSummary } from '@/entity/post';
 import { getFormattedWrittenDate } from '@/feature/post';
 
 import * as styles from './PostListItem.css';

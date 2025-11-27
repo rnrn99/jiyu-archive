@@ -4,8 +4,7 @@ import Link from 'next/link';
 
 import { ExtendedRecordMap } from 'notion-types';
 
-import PostEntity from '@/entity/post';
-import { PostCategory, PostSummary } from '@/entity/post/type';
+import { PostEntity, PostCategory, PostSummary } from '@/entity/post';
 import { NotionAdapter } from '@/feature/post';
 import HorizontalDivider from '@/shared/ui/Divider/HorizontalDivider';
 

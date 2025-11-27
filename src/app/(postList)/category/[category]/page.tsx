@@ -3,7 +3,7 @@ import { cache } from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { PostCategory } from '@/entity/post/type';
+import { PostCategory } from '@/entity/post';
 import { NotionAdapter } from '@/feature/post';
 import { CategoryTab, PostList, CategoryPageParams } from '@/pages/postList';
 import { notionAPI } from '@/shared/api/notion';

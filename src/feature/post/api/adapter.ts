@@ -1,6 +1,6 @@
 import { ExtendedRecordMap } from 'notion-types';
 
-import { PostCategory, PostSummary, TableOfContentsItem } from '@/entity/post/type';
+import { PostCategory, PostSummary, TableOfContentsItem } from '@/entity/post';
 import { notionAPI } from '@/shared/api/notion';
 
 class NotionAdapter {

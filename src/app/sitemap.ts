@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 
-import PostEntity from '@/entity/post';
+import { PostEntity } from '@/entity/post';
 import { NotionAdapter } from '@/feature/post';
 import { notionAPI } from '@/shared/api/notion';
 import { SEOConfig } from '@/shared/config';

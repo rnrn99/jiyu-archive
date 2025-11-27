@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PostCategory } from '@/entity/post/type';
+import { PostCategory } from '@/entity/post';
 import { getFormattedWrittenDate } from '@/feature/post';
 import HorizontalDivider from '@/shared/ui/Divider/HorizontalDivider';
 import SeparatorDivider from '@/shared/ui/Divider/SeparatorDivider';

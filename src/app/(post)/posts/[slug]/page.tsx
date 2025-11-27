@@ -1,7 +1,6 @@
 import React, { cache } from 'react';
 
-import PostEntity from '@/entity/post';
-import { PostSummary } from '@/entity/post/type';
+import { PostEntity, PostSummary } from '@/entity/post';
 import { NotionAdapter } from '@/feature/post';
 import {
   BackButton,

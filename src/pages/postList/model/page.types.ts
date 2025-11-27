@@ -1,4 +1,4 @@
-import { PostCategory } from '@/entity/post/type';
+import { PostCategory } from '@/entity/post';
 
 export interface CategoryPageParams {
   category: PostCategory;

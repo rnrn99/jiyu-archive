@@ -1,9 +1,9 @@
 import React from 'react';
 
-import HorizontalDivider from '@/components/Divider/HorizontalDivider';
-import SeparatorDivider from '@/components/Divider/SeparatorDivider';
 import { PostCategory } from '@/entity/post/type';
 import PostFeature from '@/feature/post';
+import HorizontalDivider from '@/shared/ui/Divider/HorizontalDivider';
+import SeparatorDivider from '@/shared/ui/Divider/SeparatorDivider';
 
 import * as styles from './PostHeader.css';
 

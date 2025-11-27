@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import { responsiveStyle } from '@/components/media.css';
+import { responsiveStyle } from '@/shared/ui/media.css';
 
 export const nav = style([
   {

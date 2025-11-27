@@ -1,7 +1,7 @@
 import React from 'react';
 
-import HashTag from '@/components/HashTag';
 import { PostSummary } from '@/entity/post/type';
+import HashTag from '@/shared/ui/HashTag';
 
 import * as styles from './PostFooter.css';
 

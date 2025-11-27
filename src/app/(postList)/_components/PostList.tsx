@@ -4,10 +4,10 @@ import Link from 'next/link';
 
 import { ExtendedRecordMap } from 'notion-types';
 
-import HorizontalDivider from '@/components/Divider/HorizontalDivider';
 import PostEntity from '@/entity/post';
 import { PostCategory, PostSummary } from '@/entity/post/type';
 import NotionAdapter from '@/infrastructure/notion/adapter';
+import HorizontalDivider from '@/shared/ui/Divider/HorizontalDivider';
 
 import { ALL_TAB } from './CategoryTab';
 import * as styles from './PostList.css';

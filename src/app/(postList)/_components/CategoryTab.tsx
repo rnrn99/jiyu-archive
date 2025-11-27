@@ -4,8 +4,8 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import Tab from '@/components/Tab';
 import { PostCategory } from '@/entity/post/type';
+import Tab from '@/shared/ui/Tab';
 
 export const ALL_TAB = '전체' as const;
 

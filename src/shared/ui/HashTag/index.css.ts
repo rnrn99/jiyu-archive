@@ -4,18 +4,20 @@ import { responsiveStyle } from '../media.css';
 
 export const hashTag = style([
   {
-    padding: '3px 5px',
+    padding: '4px 6px',
     borderRadius: '3px',
     fontSize: '10px',
     fontWeight: 500,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#eaeaea',
     color: '#666666',
     whiteSpace: 'nowrap',
+    '::before': {
+      content: '#',
+      marginRight: '2px',
+    },
   },
   responsiveStyle({
     tablet: {
-      padding: '3px 6px',
-      borderRadius: '4px',
       fontSize: '12px',
     },
   }),

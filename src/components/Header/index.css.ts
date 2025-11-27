@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import { responsiveStyle } from '../media.css';
+import { responsiveStyle } from '../../shared/ui/media.css';
 
 export const header = style({
   width: '100%',

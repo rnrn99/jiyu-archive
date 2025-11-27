@@ -2,9 +2,7 @@ import React, { cache } from 'react';
 
 import PostEntity from '@/entity/post';
 import { PostSummary } from '@/entity/post/type';
-import SiteFeature from '@/feature/site';
-import NotionAdapter from '@/infrastructure/notion/adapter';
-import { notion } from '@/infrastructure/notion/adapter/api';
+import { NotionAdapter } from '@/feature/post';
 import {
   BackButton,
   PostFooter,
@@ -14,13 +12,17 @@ import {
   PostPageParams,
   styles,
 } from '@/pages/posts';
+import { notionAPI } from '@/shared/api/notion';
+import { SEOConfig } from '@/shared/config';
 
 const getPostSummary = cache(
   async (slug: PostSummary['slug']) => await NotionAdapter.getPostSummaryBySlug(slug),
 );
 
 export async function generateStaticParams() {
-  const recordMap = await notion.getPageData(process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string);
+  const recordMap = await notionAPI.getPageData(
+    process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string,
+  );
   const postSummaries = NotionAdapter.getPostSummaries(recordMap);
 
   return postSummaries
@@ -36,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<PostPagePar
   const postSummary = await getPostSummary(slug);
 
   return {
-    title: SiteFeature.getMetaTitle(postSummary.title),
+    title: SEOConfig.getMetaTitle(postSummary.title),
     description: postSummary.description,
   };
 }
@@ -47,7 +49,7 @@ async function PostPage({ params }: { params: Promise<PostPageParams> }) {
   const postSummary = await getPostSummary(slug);
   const hasPostFooter = postSummary?.tag && postSummary?.tag.length > 0;
 
-  const result = await notion.getPageData(postSummary.id);
+  const result = await notionAPI.getPageData(postSummary.id);
 
   return (
     <>

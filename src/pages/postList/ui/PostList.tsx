@@ -6,7 +6,7 @@ import { ExtendedRecordMap } from 'notion-types';
 
 import PostEntity from '@/entity/post';
 import { PostCategory, PostSummary } from '@/entity/post/type';
-import NotionAdapter from '@/infrastructure/notion/adapter';
+import { NotionAdapter } from '@/feature/post';
 import HorizontalDivider from '@/shared/ui/Divider/HorizontalDivider';
 
 import { ALL_TAB } from './CategoryTab';

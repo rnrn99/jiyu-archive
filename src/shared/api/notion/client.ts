@@ -1,6 +1,6 @@
 import { NotionAPI as NotionClient } from 'notion-client';
 
-import { NotionAPIPort } from '../port';
+import { NotionAPIPort } from './types';
 
 function NotionAPI(): NotionAPIPort {
   const notion = new NotionClient({
@@ -14,6 +14,5 @@ function NotionAPI(): NotionAPIPort {
   };
 }
 
-export default NotionAPI;
-
-export const notion = NotionAPI();
+const notionAPI = NotionAPI();
+export default notionAPI;

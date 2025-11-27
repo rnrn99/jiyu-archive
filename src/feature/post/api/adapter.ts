@@ -1,8 +1,7 @@
 import { ExtendedRecordMap } from 'notion-types';
 
 import { PostCategory, PostSummary, TableOfContentsItem } from '@/entity/post/type';
-
-import { notion } from './api';
+import { notionAPI } from '@/shared/api/notion';
 
 class NotionAdapter {
   private static getPostIds = (recordMap: ExtendedRecordMap) => {
@@ -80,7 +79,7 @@ class NotionAdapter {
    * page slug를 통해 post의 정보를 반환합니다.
    */
   static getPostSummaryBySlug = async (slug: PostSummary['slug']): Promise<PostSummary> => {
-    const recordMap = await notion.getPageData(
+    const recordMap = await notionAPI.getPageData(
       process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string,
     );
 

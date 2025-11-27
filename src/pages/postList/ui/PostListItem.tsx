@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { PostSummary } from '@/entity/post/type';
-import PostFeature from '@/feature/post';
+import { getFormattedWrittenDate } from '@/feature/post';
 
 import * as styles from './PostListItem.css';
 
@@ -19,7 +19,7 @@ function PostListItem({ title, category, written }: Props) {
         <hr className={styles.divider} />
         <span className={styles.category}>{category}</span>
       </div>
-      <time className={styles.written}>{PostFeature.getFormattedWrittenDate(written)}</time>
+      <time className={styles.written}>{getFormattedWrittenDate(written)}</time>
     </article>
   );
 }

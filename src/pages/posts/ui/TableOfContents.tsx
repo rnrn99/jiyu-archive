@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { ExtendedRecordMap } from 'notion-types';
 
 import { TableOfContentsItem } from '@/entity/post/type';
-import NotionAdapter from '@/infrastructure/notion/adapter';
+import { NotionAdapter } from '@/feature/post';
 
 import * as styles from './TableOfContents.css';
 

@@ -2,6 +2,8 @@ import React, { cache } from 'react';
 
 import { PostEntity, PostSummary } from '@/entity/post';
 import { NotionAdapter } from '@/feature/post';
+import { notionAPI } from '@/shared/api/notion';
+import { SEOConfig } from '@/shared/config';
 import {
   BackButton,
   PostFooter,
@@ -10,9 +12,7 @@ import {
   TableOfContents,
   PostPageParams,
   styles,
-} from '@/pages/posts';
-import { notionAPI } from '@/shared/api/notion';
-import { SEOConfig } from '@/shared/config';
+} from '@/views/posts';
 
 const getPostSummary = cache(
   async (slug: PostSummary['slug']) => await NotionAdapter.getPostSummaryBySlug(slug),

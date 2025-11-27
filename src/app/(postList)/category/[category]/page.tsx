@@ -5,9 +5,9 @@ import { notFound } from 'next/navigation';
 
 import { PostCategory } from '@/entity/post';
 import { NotionAdapter } from '@/feature/post';
-import { CategoryTab, PostList, CategoryPageParams } from '@/pages/postList';
 import { notionAPI } from '@/shared/api/notion';
 import { SEOConfig } from '@/shared/config';
+import { CategoryTab, PostList, CategoryPageParams } from '@/views/postList';
 
 interface Props {
   params: Promise<CategoryPageParams>;

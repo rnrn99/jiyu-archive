@@ -3,9 +3,9 @@ import 'katex/dist/katex.min.css';
 import { Metadata } from 'next';
 
 import { NotionAdapter } from '@/feature/post';
-import { CategoryTab, PostList } from '@/pages/postList';
 import { notionAPI } from '@/shared/api/notion';
 import { SEOConfig } from '@/shared/config';
+import { CategoryTab, PostList } from '@/views/postList';
 
 export const metadata: Metadata = {
   title: SEOConfig.getMetaTitle(),

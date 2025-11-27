@@ -3,8 +3,8 @@ import { CSSProperties } from 'react';
 import { ImageResponse } from 'next/og';
 
 import { getFormattedWrittenDate, NotionAdapter } from '@/feature/post';
-import { PostPageParams } from '@/pages/posts';
 import { SEOConfig } from '@/shared/config';
+import { PostPageParams } from '@/views/posts';
 
 export const size = {
   width: 1200,

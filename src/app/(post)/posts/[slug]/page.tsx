@@ -5,14 +5,15 @@ import { PostSummary } from '@/entity/post/type';
 import SiteFeature from '@/feature/site';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 import { notion } from '@/infrastructure/notion/adapter/api';
-
-import BackButton from './_components/BackButton';
-import PostFooter from './_components/PostFooter';
-import PostHeader from './_components/PostHeader';
-import Renderer from './_components/Renderer';
-import TableOfContents from './_components/TableOfContents';
-import * as styles from './page.css';
-import { PostPageParams } from './page.types';
+import {
+  BackButton,
+  PostFooter,
+  PostHeader,
+  Renderer,
+  TableOfContents,
+  PostPageParams,
+  styles,
+} from '@/pages/posts';
 
 const getPostSummary = cache(
   async (slug: PostSummary['slug']) => await NotionAdapter.getPostSummaryBySlug(slug),

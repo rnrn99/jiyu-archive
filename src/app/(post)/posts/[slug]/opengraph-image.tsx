@@ -6,7 +6,7 @@ import PostFeature from '@/feature/post';
 import SiteFeature from '@/feature/site';
 import NotionAdapter from '@/infrastructure/notion/adapter';
 
-import { PostPageParams } from './page.types';
+import { PostPageParams } from '../../../../pages/posts/model/page.types';
 
 export const size = {
   width: 1200,

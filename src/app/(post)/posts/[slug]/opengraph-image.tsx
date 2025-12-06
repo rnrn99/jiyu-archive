@@ -2,11 +2,9 @@ import { CSSProperties } from 'react';
 
 import { ImageResponse } from 'next/og';
 
-import PostFeature from '@/feature/post';
-import SiteFeature from '@/feature/site';
-import NotionAdapter from '@/infrastructure/notion/adapter';
-
-import { PostPageParams } from './page.types';
+import { getFormattedWrittenDate, NotionAdapter } from '@/feature/post';
+import { SEOConfig } from '@/shared/config';
+import { PostPageParams } from '@/views/posts';
 
 export const size = {
   width: 1200,
@@ -23,13 +21,13 @@ export default async function Image({ params }: { params: Promise<PostPageParams
     (
       <div style={styles.container}>
         <div style={styles.contentWrapper}>
-          <div style={styles.content}>{SiteFeature.TITLE}</div>
+          <div style={styles.content}>{SEOConfig.title}</div>
           <div style={styles.line} />
         </div>
         <div style={styles.title}>{post.title}</div>
         <div style={styles.contentWrapper}>
           <div style={styles.line} />
-          <div style={styles.content}>{PostFeature.getFormattedWrittenDate(post.written)}</div>
+          <div style={styles.content}>{getFormattedWrittenDate(post.written)}</div>
         </div>
       </div>
     ),

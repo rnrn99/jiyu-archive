@@ -1,25 +1,27 @@
 import React, { cache } from 'react';
 
-import PostEntity from '@/entity/post';
-import { PostSummary } from '@/entity/post/type';
-import SiteFeature from '@/feature/site';
-import NotionAdapter from '@/infrastructure/notion/adapter';
-import { notion } from '@/infrastructure/notion/adapter/api';
-
-import BackButton from './_components/BackButton';
-import PostFooter from './_components/PostFooter';
-import PostHeader from './_components/PostHeader';
-import Renderer from './_components/Renderer';
-import TableOfContents from './_components/TableOfContents';
-import * as styles from './page.css';
-import { PostPageParams } from './page.types';
+import { PostEntity, PostSummary } from '@/entity/post';
+import { NotionAdapter } from '@/feature/post';
+import { notionAPI } from '@/shared/api/notion';
+import { SEOConfig } from '@/shared/config';
+import {
+  BackButton,
+  PostFooter,
+  PostHeader,
+  Renderer,
+  TableOfContents,
+  PostPageParams,
+  styles,
+} from '@/views/posts';
 
 const getPostSummary = cache(
   async (slug: PostSummary['slug']) => await NotionAdapter.getPostSummaryBySlug(slug),
 );
 
 export async function generateStaticParams() {
-  const recordMap = await notion.getPageData(process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string);
+  const recordMap = await notionAPI.getPageData(
+    process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string,
+  );
   const postSummaries = NotionAdapter.getPostSummaries(recordMap);
 
   return postSummaries
@@ -35,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<PostPagePar
   const postSummary = await getPostSummary(slug);
 
   return {
-    title: SiteFeature.getMetaTitle(postSummary.title),
+    title: SEOConfig.getMetaTitle(postSummary.title),
     description: postSummary.description,
   };
 }
@@ -46,7 +48,7 @@ async function PostPage({ params }: { params: Promise<PostPageParams> }) {
   const postSummary = await getPostSummary(slug);
   const hasPostFooter = postSummary?.tag && postSummary?.tag.length > 0;
 
-  const result = await notion.getPageData(postSummary.id);
+  const result = await notionAPI.getPageData(postSummary.id);
 
   return (
     <>

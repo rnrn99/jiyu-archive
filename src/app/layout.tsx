@@ -1,15 +1,15 @@
 import 'react-notion-x/src/styles.css';
-import '../styles/globals.css';
+import './ui/globals.css';
 
 import type { Metadata } from 'next';
 
 import { Analytics } from '@vercel/analytics/next';
 import clsx from 'clsx';
 
-import Header from '@/components/Header';
-import Layout from '@/components/Layout';
+import Header from '@/widgets/ui/Header';
+import Layout from '@/widgets/ui/Layout';
 
-import { notoSansKr, nanumGothicCoding } from './font';
+import { notoSansKr, nanumGothicCoding } from './ui/font';
 
 export const metadata: Metadata = {
   title: '',

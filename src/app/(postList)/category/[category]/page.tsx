@@ -3,21 +3,18 @@ import { cache } from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { PostCategory } from '@/entity/post/type';
-import SiteFeature from '@/feature/site';
-import NotionAdapter from '@/infrastructure/notion/adapter';
-import { notion } from '@/infrastructure/notion/adapter/api';
-
-import { CategoryPageParams } from './page.types';
-import CategoryTab from '../../_components/CategoryTab';
-import PostList from '../../_components/PostList';
+import { PostCategory } from '@/entity/post';
+import { NotionAdapter } from '@/feature/post';
+import { notionAPI } from '@/shared/api/notion';
+import { SEOConfig } from '@/shared/config';
+import { CategoryTab, PostList, CategoryPageParams } from '@/views/postList';
 
 interface Props {
   params: Promise<CategoryPageParams>;
 }
 
 const getPageData = cache(
-  async () => await notion.getPageData(process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string),
+  async () => await notionAPI.getPageData(process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string),
 );
 
 export async function generateStaticParams() {
@@ -33,8 +30,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
 
   return {
-    title: SiteFeature.getMetaTitle(`${category} 글 목록`),
-    description: SiteFeature.DESCRIPTION,
+    title: SEOConfig.getMetaTitle(`${category} 글 목록`),
+    description: SEOConfig.description,
   };
 }
 

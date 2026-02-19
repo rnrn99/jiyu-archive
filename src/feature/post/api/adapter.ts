@@ -1,9 +1,16 @@
-import { ExtendedRecordMap } from 'notion-types';
+import { Block, Collection, ExtendedRecordMap } from 'notion-types';
 
 import { PostCategory, PostSummary, TableOfContentsItem } from '@/entity/post';
 import { notionAPI } from '@/shared/api/notion';
 
 class NotionAdapter {
+  private static unwrapValue = <T>(value: T | { role: string; value: T }): T => {
+    if (value !== null && typeof value === 'object' && 'value' in (value as object)) {
+      return (value as { value: T }).value;
+    }
+    return value as T;
+  };
+
   private static getPostIds = (recordMap: ExtendedRecordMap) => {
     const collectionQuery = Object.values(recordMap.collection_query)[0];
     const collectionQueryValue = Object.values(collectionQuery)[0]['collection_group_results'];
@@ -12,7 +19,8 @@ class NotionAdapter {
   };
 
   private static getPostSchema = (recordMap: ExtendedRecordMap) => {
-    return Object.values(recordMap.collection)[0].value.schema;
+    const collection = this.unwrapValue(Object.values(recordMap.collection)[0].value) as Collection;
+    return collection.schema;
   };
 
   /**
@@ -27,7 +35,7 @@ class NotionAdapter {
     const schema = this.getPostSchema(recordMap);
 
     return postIds.map((postId) => {
-      const postValue = block[postId].value;
+      const postValue = this.unwrapValue(block[postId].value) as Block;
       const written = new Date(postValue.created_time);
       const summary = {
         id: postId,
@@ -68,6 +76,7 @@ class NotionAdapter {
 
   static getCategoryList = (recordMap: ExtendedRecordMap): PostCategory[] => {
     const schema = this.getPostSchema(recordMap);
+    console.log(schema);
 
     const categorySchema = Object.values(schema).find(({ name }) => name === 'category');
     if (!categorySchema) return [];
@@ -101,7 +110,7 @@ class NotionAdapter {
     const result: TableOfContentsItem[] = [];
 
     Object.entries(blockMap).forEach(([id, block]) => {
-      const blockValue = block.value;
+      const blockValue = this.unwrapValue(block.value) as Block;
       const blockType = blockValue?.type;
 
       if (!blockValue || !blockType) return;

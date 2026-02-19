@@ -76,7 +76,6 @@ class NotionAdapter {
 
   static getCategoryList = (recordMap: ExtendedRecordMap): PostCategory[] => {
     const schema = this.getPostSchema(recordMap);
-    console.log(schema);
 
     const categorySchema = Object.values(schema).find(({ name }) => name === 'category');
     if (!categorySchema) return [];

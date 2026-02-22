@@ -1,54 +1,46 @@
 import { style } from '@vanilla-extract/css';
 
-import { responsiveStyle } from '@/shared/ui/media.css';
+import { vars } from '@/shared/styles/contract.css';
+import { space } from '@/shared/styles/spacing';
 
 export const header = style({
+  position: 'sticky',
+  top: 0,
+  zIndex: 100,
   width: '100%',
-
-  padding: '24px 0',
-
-  borderBottom: '1px solid #e0e0e0',
+  height: space[56],
+  backgroundColor: 'rgba(255, 255, 255, 0.94)',
+  backdropFilter: 'blur(10px)',
+  WebkitBackdropFilter: 'blur(10px)',
+  borderBottom: `1px solid ${vars.color.border}`,
 });
 
-export const container = style([
-  {
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    flexDirection: 'column',
-    rowGap: 20,
-
-    maxWidth: '768px',
-    height: '100%',
-    margin: '0 auto',
-    padding: '0 16px',
-  },
-  responsiveStyle({
-    tablet: {
-      flexDirection: 'row',
-      alignItems: 'center',
-
-      padding: '0 20px',
-    },
-  }),
-]);
-
-export const titleWrapper = style({
+export const inner = style({
+  maxWidth: vars.layout.maxWidth,
+  height: '100%',
+  margin: '0 auto',
+  padding: `0 ${space[24]}`,
   display: 'flex',
-  flexDirection: 'column',
-  rowGap: 4,
+  alignItems: 'center',
+  justifyContent: 'space-between',
 });
 
-export const title = style({
-  fontSize: '24px',
-  fontWeight: 600,
-  lineHeight: 1.2,
-  letterSpacing: '-0.01em',
-  color: '#1a1a1a',
+export const logo = style({
+  fontFamily: vars.font.sans,
+  fontSize: '15px',
+  fontWeight: 700,
+  color: vars.color.text.strong,
+  letterSpacing: '-0.02em',
+  textDecoration: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '6px',
 });
 
-export const subTitle = style({
-  fontSize: '14px',
-  fontWeight: 400,
-  color: '#666666',
+export const dot = style({
+  width: '5px',
+  height: '5px',
+  borderRadius: '50%',
+  backgroundColor: vars.color.accent.default,
+  flexShrink: 0,
 });

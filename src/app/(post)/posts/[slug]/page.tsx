@@ -6,6 +6,7 @@ import { notionAPI } from '@/shared/api/notion';
 import { SEOConfig } from '@/shared/config';
 import {
   BackButton,
+  PostFooter,
   PostHeader,
   Renderer,
   TableOfContents,
@@ -45,6 +46,10 @@ async function PostPage({ params }: { params: Promise<PostPageParams> }) {
   const { slug } = await params;
 
   const postSummary = await getPostSummary(slug);
+  const listRecordMap = await notionAPI.getPageData(
+    process.env.NEXT_PUBLIC_NOTION_DATABASE_ID as string,
+  );
+  const { prev, next } = NotionAdapter.getAdjacentPosts(listRecordMap, slug);
 
   const result = await notionAPI.getPageData(postSummary.id);
 
@@ -55,6 +60,7 @@ async function PostPage({ params }: { params: Promise<PostPageParams> }) {
       <article className={styles.article}>
         <PostHeader title={postSummary.title} tag={postSummary.tag} written={postSummary.written} />
         <Renderer recordMap={result} />
+        <PostFooter prev={prev} next={next} />
       </article>
 
       <TableOfContents recordMap={result} />

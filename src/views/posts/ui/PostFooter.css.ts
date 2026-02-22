@@ -55,5 +55,6 @@ export const title = style([
     color: vars.color.text.strong,
     lineHeight: 1.4,
     fontWeight: 500,
+    wordBreak: 'keep-all',
   },
 ]);

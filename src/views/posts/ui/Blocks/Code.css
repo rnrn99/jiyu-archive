@@ -35,6 +35,24 @@ pre.notion-code > code {
   line-height: 1.75;
 }
 
+/* ── Scrollbar ── */
+pre.notion-code > code::-webkit-scrollbar {
+  height: 4px;
+}
+
+pre.notion-code > code::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+pre.notion-code > code::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 2px;
+}
+
+pre.notion-code > code::-webkit-scrollbar-thumb:hover {
+  background: #b2b2b2;
+}
+
 /* ── Copy button ── */
 .notion-code-copy {
   position: absolute;

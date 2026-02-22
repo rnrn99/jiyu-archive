@@ -20,6 +20,7 @@ globalStyle(`${renderer} h2`, {
   fontWeight: 600,
   lineHeight: 1.4,
   color: vars.color.text.strong,
+  wordBreak: 'keep-all',
 
   ...responsiveStyle({
     tablet: { fontSize: '26px' },
@@ -34,6 +35,7 @@ globalStyle(`${renderer} h3`, {
   fontWeight: 600,
   color: vars.color.text.strong,
   lineHeight: 1.4,
+  wordBreak: 'keep-all',
 
   ...responsiveStyle({
     tablet: { fontSize: '22px' },
@@ -48,6 +50,7 @@ globalStyle(`${renderer} h4`, {
   fontWeight: 600,
   color: vars.color.text.strong,
   lineHeight: 1.4,
+  wordBreak: 'keep-all',
 
   ...responsiveStyle({
     tablet: { fontSize: '18px' },

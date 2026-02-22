@@ -3,6 +3,19 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@/shared/styles/contract.css';
 import { space } from '@/shared/styles/spacing';
 import * as typography from '@/shared/styles/typography.css';
+import { responsiveStyle } from '@/shared/ui/media.css';
+
+export const wrapper = style([
+  {
+    paddingLeft: space[20],
+    paddingTop: space[20],
+  },
+  responsiveStyle({
+    desktop: {
+      paddingLeft: '0',
+    },
+  }),
+]);
 
 export const button = style([
   typography.label,
@@ -13,7 +26,7 @@ export const button = style([
     border: 'none',
     backgroundColor: 'transparent',
     color: vars.color.text.subtitle,
-    padding: `${space[20]} 0 0`,
+    padding: 0,
     cursor: 'pointer',
     transition: `color ${vars.motion.speed} ${vars.motion.ease}`,
 

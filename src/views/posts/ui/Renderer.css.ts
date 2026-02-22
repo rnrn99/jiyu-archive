@@ -73,21 +73,22 @@ globalStyle(`${renderer} .notion-text`, {
  */
 
 globalStyle(`${renderer} .notion-inline-code`, {
-  padding: `2px 6px`,
-  borderRadius: '4px',
-  backgroundColor: vars.color.surfaceSubtitle,
-  color: vars.color.accent.default,
-
   fontFamily: vars.font.mono,
-  fontSize: '14px',
+  fontSize: '13px',
+  fontWeight: 500,
+  color: vars.color.accent.default,
+  background: 'none',
+  backgroundColor: 'transparent',
+  padding: 0,
+  borderRadius: 0,
 });
 
 globalStyle(`${renderer} .notion-inline-code::before`, {
-  content: '"`"',
+  content: "'`'",
 });
 
 globalStyle(`${renderer} .notion-inline-code::after`, {
-  content: '"`"',
+  content: "'`'",
 });
 
 /**

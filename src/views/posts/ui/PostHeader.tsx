@@ -1,29 +1,33 @@
 import React from 'react';
 
-import { PostCategory } from '@/entity/post';
+import { PostSummary } from '@/entity/post';
 import { getFormattedWrittenDate } from '@/feature/post';
-import HorizontalDivider from '@/shared/ui/Divider/HorizontalDivider';
-import SeparatorDivider from '@/shared/ui/Divider/SeparatorDivider';
 
 import * as styles from './PostHeader.css';
 
 interface Props {
   title: string;
-  category: PostCategory;
+  tag: PostSummary['tag'];
   written: Date;
 }
 
-function PostHeader({ title, category, written }: Props) {
+function PostHeader({ title, tag, written }: Props) {
   return (
-    <div className={styles.header}>
+    <header className={styles.header} data-post-header>
       <div className={styles.postMetaWrapper}>
-        <span className={styles.category}>{category}</span>
-        <SeparatorDivider separator="|" color="#d0d0d0" size={12} />
         <time className={styles.written}>{getFormattedWrittenDate(written)}</time>
       </div>
       <h1 className={styles.title}>{title}</h1>
-      <HorizontalDivider className={styles.divider} />
-    </div>
+      {tag.length > 0 && (
+        <div className={styles.tagList}>
+          {tag.map((t) => (
+            <span key={t} className={styles.tag}>
+              {t}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
   );
 }
 

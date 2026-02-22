@@ -1,6 +1,6 @@
 import { Block, Collection, ExtendedRecordMap } from 'notion-types';
 
-import { PostCategory, PostSummary, TableOfContentsItem } from '@/entity/post';
+import { PostEntity, PostSummary, TableOfContentsItem } from '@/entity/post';
 import { notionAPI } from '@/shared/api/notion';
 
 class NotionAdapter {
@@ -40,7 +40,8 @@ class NotionAdapter {
       const summary = {
         id: postId,
         written,
-      } as PostSummary;
+        tag: [],
+      } as unknown as PostSummary;
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Object.entries(postValue.properties).map(([key, value]: [string, any]) => {
@@ -52,9 +53,6 @@ class NotionAdapter {
           case 'description':
             summary[name] = value[0][0] as PostSummary[typeof name];
             break;
-          case 'category':
-            summary[name] = value[0][0] as PostSummary[typeof name];
-            break;
           case 'status':
             summary[name] = value[0][0] as PostSummary[typeof name];
             break;
@@ -64,7 +62,7 @@ class NotionAdapter {
             break;
 
           case 'tag': {
-            const tags = value[0][0].split(',') as PostSummary[typeof name];
+            const tags = value[0][0].split(',').map((t: string) => t.trim()) as string[];
             summary[name] = tags;
             break;
           }
@@ -72,15 +70,6 @@ class NotionAdapter {
       });
       return summary;
     });
-  };
-
-  static getCategoryList = (recordMap: ExtendedRecordMap): PostCategory[] => {
-    const schema = this.getPostSchema(recordMap);
-
-    const categorySchema = Object.values(schema).find(({ name }) => name === 'category');
-    if (!categorySchema) return [];
-
-    return categorySchema?.options?.map(({ value }) => value) as PostCategory[];
   };
 
   /**
@@ -99,6 +88,26 @@ class NotionAdapter {
     }
 
     return matchedPostSummary;
+  };
+
+  /**
+   * 현재 글의 이전/다음 public 포스트를 반환합니다.
+   */
+  static getAdjacentPosts = (
+    recordMap: ExtendedRecordMap,
+    currentSlug: PostSummary['slug'],
+  ): { prev: PostSummary | null; next: PostSummary | null } => {
+    const allPosts = this.getPostSummaries(recordMap).filter((post) =>
+      PostEntity.isPublic(post.status),
+    );
+    const currentIndex = allPosts.findIndex((post) => post.slug === currentSlug);
+
+    if (currentIndex === -1) return { prev: null, next: null };
+
+    return {
+      prev: currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null,
+      next: currentIndex > 0 ? allPosts[currentIndex - 1] : null,
+    };
   };
 
   /**

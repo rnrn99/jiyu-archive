@@ -1,2 +1,2 @@
-export type { PostSummary, PostCategory, TableOfContentsItem } from './types';
+export type { PostSummary, TableOfContentsItem } from './types';
 export { default as PostEntity } from './postModel';

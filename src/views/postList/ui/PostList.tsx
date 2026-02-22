@@ -4,43 +4,49 @@ import Link from 'next/link';
 
 import { ExtendedRecordMap } from 'notion-types';
 
-import { PostEntity, PostCategory, PostSummary } from '@/entity/post';
+import { PostEntity, PostSummary } from '@/entity/post';
 import { NotionAdapter } from '@/feature/post';
-import HorizontalDivider from '@/shared/ui/Divider/HorizontalDivider';
 
-import { ALL_TAB } from './CategoryTab';
 import * as styles from './PostList.css';
 import PostListItem from './PostListItem';
 
-const getPosts = (posts: PostSummary[], category?: PostCategory) => {
+const getPosts = (posts: PostSummary[], tag?: string) => {
   const isPublicPost = (post: PostSummary) => PostEntity.isPublic(post.status);
-  const matchesCategory = (post: PostSummary) => !category || post.category === category;
+  const matchesTag = (post: PostSummary) => !tag || post.tag.includes(tag);
 
-  return posts.filter((post) => isPublicPost(post) && matchesCategory(post));
+  return posts.filter((post) => isPublicPost(post) && matchesTag(post));
 };
 
 interface Props {
   recordMap: ExtendedRecordMap;
-  category?: PostCategory;
+  tag?: string;
 }
 
-function PostList({ recordMap, category }: Props) {
+function PostList({ recordMap, tag }: Props) {
   const postSummaries = NotionAdapter.getPostSummaries(recordMap);
-  const posts = getPosts(postSummaries, category);
+  const posts = getPosts(postSummaries, tag);
 
   return (
-    <article
-      role="tabpanel"
-      aria-labelledby={`tab-${category ?? ALL_TAB}`}
-      className={styles.article}
-    >
+    <article className={styles.article}>
+      <div className={styles.topbar}>
+        <span className={styles.topbarTitle}>글 목록</span>
+        <span className={styles.topbarCount}>{posts.length} posts</span>
+      </div>
       <ul>
-        {posts?.map(({ id, title, written, slug, category }) => (
-          <li key={id}>
+        {posts?.map(({ id, title, description, written, slug, tag }, index) => (
+          <li
+            key={id}
+            className={styles.listItem}
+            style={{ '--item-delay': `${index * 0.04}s` } as React.CSSProperties}
+          >
             <Link href={`/posts/${slug}`} className={styles.link}>
-              <PostListItem title={title} category={category} written={written} />
+              <PostListItem
+                title={title}
+                description={description}
+                tag={tag}
+                written={written}
+              />
             </Link>
-            <HorizontalDivider />
           </li>
         ))}
       </ul>

@@ -1,71 +1,78 @@
 import { style } from '@vanilla-extract/css';
 
+import { vars } from '@/shared/styles/contract.css';
+import { space } from '@/shared/styles/spacing';
+import * as typography from '@/shared/styles/typography.css';
 import { responsiveStyle } from '@/shared/ui/media.css';
 
 export const postListItem = style([
   {
-    padding: '24px 0',
+    display: 'block',
+    padding: `${space[24]} 0`,
+    borderBottom: `1px solid ${vars.color.border}`,
+    cursor: 'pointer',
   },
   responsiveStyle({
-    tablet: { padding: '26px 0' },
-    desktop: { padding: '28px 0' },
+    desktop: { padding: `${space[28]} 0` },
   }),
 ]);
 
-export const header = style([
+export const top = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: space[8],
+  marginBottom: space[14],
+  flexWrap: 'wrap',
+});
+
+export const categoryTag = style([
+  typography.labelSmall,
   {
-    display: 'flex',
-    columnGap: '12px',
-    marginBottom: '12px',
+    fontSize: '11px',
+    fontWeight: 500,
+    color: vars.color.text.subtitle,
+    backgroundColor: vars.color.surfaceSubtitle,
+    padding: '2px 7px',
+    borderRadius: '3px',
+    letterSpacing: '0.01em',
   },
-  responsiveStyle({
-    tablet: { columnGap: '14px', marginBottom: '14px' },
-    desktop: { columnGap: '16px', marginBottom: '16px' },
-  }),
+]);
+
+export const date = style([
+  typography.monoBase,
+  {
+    marginLeft: 'auto',
+    color: vars.color.text.muted,
+    letterSpacing: '0.04em',
+  },
 ]);
 
 export const title = style([
+  typography.heading3,
   {
-    maxWidth: '70%',
-    flex: '0 1 auto',
-    fontSize: '15px',
-    fontWeight: 500,
+    fontSize: '17px',
+    color: vars.color.text.strong,
+    marginBottom: space[8],
+    transition: `color ${vars.motion.speed} ${vars.motion.ease}`,
+
+    selectors: {
+      [`a:hover &`]: {
+        color: vars.color.accent.default,
+      },
+    },
   },
   responsiveStyle({
-    tablet: { fontSize: '17px' },
-    desktop: { fontSize: '18px' },
+    desktop: { fontSize: '17px' },
   }),
 ]);
 
-export const divider = style({
-  flex: '1 1 0',
-  width: '100%',
-  border: 'none',
-  borderTop: '2px dotted #d0d0d0',
-});
-
-export const category = style([
+export const description = style([
+  typography.bodySmall,
   {
-    flex: '0 0 1',
-    fontSize: '12px',
-    fontWeight: 400,
-    whiteSpace: 'nowrap',
-    color: '#999999',
+    color: vars.color.text.subtitle,
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
   },
-  responsiveStyle({
-    tablet: { fontSize: '13px' },
-    desktop: { fontSize: '14px' },
-  }),
-]);
-
-export const written = style([
-  {
-    fontSize: '12px',
-    fontWeight: 400,
-    color: '#aaaaaa',
-  },
-  responsiveStyle({
-    tablet: { fontSize: '13px' },
-    desktop: { fontSize: '14px' },
-  }),
 ]);

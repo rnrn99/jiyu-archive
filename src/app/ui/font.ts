@@ -1,4 +1,4 @@
-import { Noto_Sans_KR, Nanum_Gothic_Coding } from 'next/font/google';
+import { DM_Mono, Noto_Sans_KR } from 'next/font/google';
 
 export const notoSansKr = Noto_Sans_KR({
   weight: ['400', '500', '600', '700', '800', '900'],
@@ -7,9 +7,9 @@ export const notoSansKr = Noto_Sans_KR({
   variable: '--font-noto-sans',
 });
 
-export const nanumGothicCoding = Nanum_Gothic_Coding({
-  weight: ['400', '700'],
+export const dmMono = DM_Mono({
+  weight: ['400', '500'],
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-nanum-gothic-coding',
+  variable: '--font-dm-mono',
 });

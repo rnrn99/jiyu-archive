@@ -1,60 +1,52 @@
 import { style } from '@vanilla-extract/css';
 
-import { responsiveStyle } from '@/shared/ui/media.css';
+import { vars } from '@/shared/styles/contract.css';
+import { space } from '@/shared/styles/spacing';
+import * as typography from '@/shared/styles/typography.css';
 
 export const header = style({
-  marginTop: '8px',
+  padding: `${space[24]} 0 ${space[36]}`,
+  borderBottom: `1px solid ${vars.color.border}`,
+  marginBottom: space[48],
 });
 
 export const postMetaWrapper = style({
   display: 'flex',
   alignItems: 'center',
-  columnGap: '12px',
-  marginBottom: '16px',
+  gap: space[8],
+  marginBottom: space[16],
 });
 
-export const category = style([
-  {
-    fontSize: '14px',
-    fontWeight: 400,
-    color: '#999999',
-  },
-  responsiveStyle({
-    desktop: {
-      fontSize: '15px',
-    },
-  }),
-]);
-
 export const written = style([
+  typography.monoBase,
   {
-    fontSize: '13px',
-    color: '#aaa',
+    color: vars.color.text.muted,
     fontVariantNumeric: 'tabular-nums',
+    letterSpacing: '0.05em',
   },
-  responsiveStyle({
-    desktop: {
-      fontSize: '14px',
-    },
-  }),
 ]);
 
 export const title = style([
+  typography.heading1,
   {
-    fontSize: '28px',
-    fontWeight: 700,
-    lineHeight: 1.3,
-    color: '#1a1a1a',
-    wordBreak: 'keep-all',
+    color: vars.color.text.strong,
+    marginBottom: space[20],
   },
-  responsiveStyle({
-    tablet: { fontSize: '30px' },
-    desktop: {
-      fontSize: '32px',
-    },
-  }),
 ]);
 
-export const divider = style({
-  margin: '16px 0',
+export const tagList = style({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: space[8],
 });
+
+export const tag = style([
+  typography.labelSmall,
+  {
+    color: vars.color.text.subtitle,
+    backgroundColor: vars.color.surfaceSubtitle,
+    padding: '2px 7px',
+    borderRadius: '3px',
+    letterSpacing: '0.01em',
+  },
+]);

@@ -1,22 +1,28 @@
 import { style } from '@vanilla-extract/css';
 
+import { vars } from '@/shared/styles/contract.css';
+import { space } from '@/shared/styles/spacing';
+import * as typography from '@/shared/styles/typography.css';
+
 export const postFooter = style({
-  marginTop: '40px',
-  padding: '24px 0',
-  borderTop: '1px solid #e0e0e0',
+  marginTop: space[40],
+  padding: `${space[24]} 0`,
+  borderTop: `1px solid ${vars.color.border}`,
 });
 
-export const tagLabel = style({
-  display: 'block',
-  marginBottom: '12px',
-  fontSize: '14px',
-  fontWeight: 600,
-  color: '#666666',
-});
+export const tagLabel = style([
+  typography.label,
+  {
+    display: 'block',
+    marginBottom: space[12],
+    fontWeight: 600,
+    color: vars.color.text.subtitle,
+  },
+]);
 
 export const tagWrapper = style({
   display: 'flex',
   alignItems: 'center',
-  columnGap: '12px',
+  columnGap: space[12],
   flexWrap: 'wrap',
 });

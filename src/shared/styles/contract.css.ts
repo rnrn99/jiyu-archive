@@ -3,13 +3,13 @@ import { createThemeContract } from '@vanilla-extract/css';
 export const vars = createThemeContract({
   color: {
     bg: null,
-    surfaceSubtle: null,
+    surfaceSubtitle: null,
     codeBlock: null,
 
     text: {
       strong: null,
       body: null,
-      subtle: null,
+      subtitle: null,
       muted: null,
     },
 

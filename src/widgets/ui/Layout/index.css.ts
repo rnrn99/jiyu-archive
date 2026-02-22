@@ -1,11 +1,11 @@
 import { style } from '@vanilla-extract/css';
 
-const MAX_WIDTH = 768;
+import { vars } from '@/shared/styles/contract.css';
 
 export const layout = style({
   '@media': {
-    '(min-width: 768px)': {
-      width: MAX_WIDTH,
+    '(min-width: 720px)': {
+      width: vars.layout.maxWidth,
       margin: '0 auto',
     },
   },

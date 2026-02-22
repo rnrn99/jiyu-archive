@@ -1,5 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 
+import { vars } from '@/shared/styles/contract.css';
+import { space } from '@/shared/styles/spacing';
 import { responsiveStyle } from '@/shared/ui/media.css';
 
 export const renderer = style({
@@ -12,44 +14,44 @@ export const renderer = style({
  */
 
 globalStyle(`${renderer} h2`, {
-  margin: '40px 0 18px',
+  margin: `${space[40]} 0 18px`,
 
   fontSize: '24px',
   fontWeight: 600,
   lineHeight: 1.4,
-  color: '#1a1a1a',
+  color: vars.color.text.strong,
 
   ...responsiveStyle({
     tablet: { fontSize: '26px' },
-    desktop: { fontSize: '28px', margin: '48px 0 20px' },
+    desktop: { fontSize: '28px', margin: `${space[48]} 0 ${space[20]}` },
   }),
 });
 
 globalStyle(`${renderer} h3`, {
-  margin: '28px 0 12px',
+  margin: `${space[28]} 0 ${space[12]}`,
 
   fontSize: '20px',
   fontWeight: 600,
-  color: '#1a1a1a',
+  color: vars.color.text.strong,
   lineHeight: 1.4,
 
   ...responsiveStyle({
     tablet: { fontSize: '22px' },
-    desktop: { fontSize: '24px', margin: '36px 0 16px' },
+    desktop: { fontSize: '24px', margin: `${space[36]} 0 ${space[16]}` },
   }),
 });
 
 globalStyle(`${renderer} h4`, {
-  margin: '20px 0 8px',
+  margin: `${space[20]} 0 ${space[8]}`,
 
   fontSize: '17px',
   fontWeight: 600,
-  color: '#1a1a1a',
+  color: vars.color.text.strong,
   lineHeight: 1.4,
 
   ...responsiveStyle({
     tablet: { fontSize: '18px' },
-    desktop: { fontSize: '20px', margin: '24px 0 10px' },
+    desktop: { fontSize: '20px', margin: `${space[24]} 0 10px` },
   }),
 });
 
@@ -57,7 +59,7 @@ globalStyle(`${renderer} .notion-text`, {
   fontSize: '16px',
   fontWeight: 400,
   lineHeight: 1.8,
-  color: '#333333',
+  color: vars.color.text.body,
   wordBreak: 'keep-all',
 
   ...responsiveStyle({
@@ -71,12 +73,12 @@ globalStyle(`${renderer} .notion-text`, {
  */
 
 globalStyle(`${renderer} .notion-inline-code`, {
-  padding: '2px 6px',
+  padding: `2px 6px`,
   borderRadius: '4px',
-  backgroundColor: '#f5f5f5',
-  color: '#FC4E00',
+  backgroundColor: vars.color.surfaceSubtitle,
+  color: vars.color.accent.default,
 
-  fontFamily: "'Monaco', 'Courier New', monospace",
+  fontFamily: vars.font.mono,
   fontSize: '14px',
 });
 
@@ -109,15 +111,15 @@ globalStyle(`${renderer} table`, {
 });
 
 globalStyle(`${renderer} tr.notion-simple-table-header-row`, {
-  backgroundColor: '#f8f8f8',
+  backgroundColor: vars.color.surfaceSubtitle,
   fontWeight: 500,
-  color: '#1a1a1a',
+  color: vars.color.text.strong,
 });
 
 globalStyle(`${renderer} td`, {
-  padding: '12px',
+  padding: space[12],
   border: 'none',
-  borderBottom: '1px solid #e5e5e5',
+  borderBottom: `1px solid ${vars.color.border}`,
   verticalAlign: 'middle',
   textAlign: 'center',
 });

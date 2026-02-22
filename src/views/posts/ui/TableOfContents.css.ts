@@ -1,5 +1,8 @@
 import { style } from '@vanilla-extract/css';
 
+import { vars } from '@/shared/styles/contract.css';
+import { space } from '@/shared/styles/spacing';
+import * as typography from '@/shared/styles/typography.css';
 import { responsiveStyle } from '@/shared/ui/media.css';
 
 export const nav = style([
@@ -10,11 +13,11 @@ export const nav = style([
     desktop: {
       position: 'fixed',
       top: '300px',
-      right: '20px',
+      right: space[20],
       display: 'block',
       maxWidth: '250px',
-      paddingLeft: '14px',
-      borderLeft: '1px solid #e0e0e0',
+      paddingLeft: space[14],
+      borderLeft: `1px solid ${vars.color.border}`,
     },
   }),
 ]);
@@ -33,38 +36,39 @@ export const listItem = style({
       paddingLeft: '0',
     },
     '&[data-level="3"]': {
-      paddingLeft: '12px',
+      paddingLeft: space[12],
     },
     '&[data-level="4"]': {
-      paddingLeft: '24px',
+      paddingLeft: space[24],
     },
   },
 });
 
-export const link = style({
-  display: 'block',
+export const link = style([
+  typography.labelSmall,
+  {
+    display: 'block',
+    lineHeight: 1.4,
+    color: vars.color.text.muted,
+    textDecoration: 'none',
+    padding: `${space[4]} 0`,
+    transition: `color ${vars.motion.speed} ${vars.motion.ease}`,
+    overflow: 'hidden',
 
-  fontSize: '12px',
-  lineHeight: '1.4',
-  color: '#6b7280',
-  textDecoration: 'none',
-  padding: '4px 0',
-  transition: 'color 0.2s ease',
-  overflow: 'hidden',
-
-  ':hover': {
-    color: '#111827',
+    ':hover': {
+      color: vars.color.text.strong,
+    },
   },
-});
+]);
 
 export const linkActive = style([
   link,
   {
-    color: '#FF6B35',
-    fontWeight: '600',
+    color: vars.color.accent.default,
+    fontWeight: 600,
 
     ':hover': {
-      color: '#FC4E00',
+      color: vars.color.accent.default,
     },
   },
 ]);

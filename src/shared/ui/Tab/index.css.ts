@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
+import { space } from '@/shared/styles/spacing';
+
 import { responsiveStyle } from '../media.css';
 
 export const tabList = style([
@@ -7,12 +9,12 @@ export const tabList = style([
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    columnGap: 20,
+    columnGap: space[20],
     flexWrap: 'wrap',
-    padding: '14px 0',
+    padding: `${space[14]} 0`,
   },
   responsiveStyle({
-    tablet: { columnGap: 24, padding: '16px 0' },
-    desktop: { columnGap: 32, padding: '20px 0' },
+    tablet: { columnGap: space[24], padding: `${space[16]} 0` },
+    desktop: { columnGap: space[32], padding: `${space[20]} 0` },
   }),
 ]);

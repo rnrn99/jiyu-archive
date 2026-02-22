@@ -6,13 +6,13 @@ import { primitives } from './primitives';
 export const lightTheme = createTheme(vars, {
   color: {
     bg: primitives.color.white,
-    surfaceSubtle: primitives.color.grey50,
+    surfaceSubtitle: primitives.color.grey50,
     codeBlock: primitives.color.codeBlock,
 
     text: {
       strong: primitives.color.grey900,
       body: primitives.color.grey700,
-      subtle: primitives.color.grey500,
+      subtitle: primitives.color.grey500,
       muted: primitives.color.grey300,
     },
 

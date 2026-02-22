@@ -1,23 +1,25 @@
 import { style } from '@vanilla-extract/css';
 
+import { vars } from '@/shared/styles/contract.css';
+import { space } from '@/shared/styles/spacing';
+import * as typography from '@/shared/styles/typography.css';
 import { responsiveStyle } from '@/shared/ui/media.css';
 
 export const header = style({
-  marginTop: '8px',
+  marginTop: space[8],
 });
 
 export const postMetaWrapper = style({
   display: 'flex',
   alignItems: 'center',
-  columnGap: '12px',
-  marginBottom: '16px',
+  columnGap: space[12],
+  marginBottom: space[16],
 });
 
 export const category = style([
+  typography.label,
   {
-    fontSize: '14px',
-    fontWeight: 400,
-    color: '#999999',
+    color: vars.color.text.muted,
   },
   responsiveStyle({
     desktop: {
@@ -27,34 +29,25 @@ export const category = style([
 ]);
 
 export const written = style([
+  typography.monoBase,
   {
-    fontSize: '13px',
-    color: '#aaa',
+    color: vars.color.text.muted,
     fontVariantNumeric: 'tabular-nums',
   },
   responsiveStyle({
     desktop: {
-      fontSize: '14px',
+      fontSize: '12px',
     },
   }),
 ]);
 
 export const title = style([
+  typography.heading1,
   {
-    fontSize: '28px',
-    fontWeight: 700,
-    lineHeight: 1.3,
-    color: '#1a1a1a',
-    wordBreak: 'keep-all',
+    color: vars.color.text.strong,
   },
-  responsiveStyle({
-    tablet: { fontSize: '30px' },
-    desktop: {
-      fontSize: '32px',
-    },
-  }),
 ]);
 
 export const divider = style({
-  margin: '16px 0',
+  margin: `${space[16]} 0`,
 });

@@ -104,6 +104,8 @@ globalStyle(`${renderer} .notion-link-mention > a`, {
  */
 
 globalStyle(`${renderer} table`, {
+  width: '100%',
+  margin: `${space[24]} 0`,
   fontSize: '15px',
   border: 'none',
   borderCollapse: 'collapse',

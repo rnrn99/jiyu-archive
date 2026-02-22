@@ -7,7 +7,7 @@ import * as typography from '@/shared/styles/typography.css';
 export const header = style({
   padding: `${space[24]} 0 ${space[36]}`,
   borderBottom: `1px solid ${vars.color.border}`,
-  marginBottom: space[40],
+  marginBottom: space[48],
 });
 
 export const postMetaWrapper = style({

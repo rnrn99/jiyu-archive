@@ -6,10 +6,12 @@ import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
 import clsx from 'clsx';
 
+import { lightTheme } from '@/shared/styles';
 import Header from '@/widgets/ui/Header';
 import Layout from '@/widgets/ui/Layout';
 
-import { notoSansKr, nanumGothicCoding } from './ui/font';
+
+import { dmMono, notoSansKr } from './ui/font';
 
 export const metadata: Metadata = {
   title: '',
@@ -22,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={clsx(notoSansKr.variable, nanumGothicCoding.variable)}>
+    <html lang="ko" className={clsx(notoSansKr.variable, dmMono.variable, lightTheme)}>
       <head>
         <meta
           name="google-site-verification"

@@ -126,3 +126,19 @@ globalStyle(`${renderer} td`, {
   verticalAlign: 'middle',
   textAlign: 'center',
 });
+
+/**
+ * ======== Image ========
+ */
+
+globalStyle(`${renderer} .notion-asset-wrapper-image`, {
+  margin: `${space[24]} 0`,
+  width: '100% !important',
+  height: 'auto !important',
+});
+
+globalStyle(`${renderer} .notion-asset-wrapper-image img`, {
+  width: '100%',
+  height: 'auto',
+  objectFit: 'contain',
+});

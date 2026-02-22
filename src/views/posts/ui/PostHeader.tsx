@@ -13,7 +13,7 @@ interface Props {
 
 function PostHeader({ title, tag, written }: Props) {
   return (
-    <header className={styles.header}>
+    <header className={styles.header} data-post-header>
       <div className={styles.postMetaWrapper}>
         <time className={styles.written}>{getFormattedWrittenDate(written)}</time>
       </div>

@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
+import { ping } from '@/shared/styles/animation';
 import { vars } from '@/shared/styles/contract.css';
 import { space } from '@/shared/styles/spacing';
 
@@ -38,9 +39,18 @@ export const logo = style({
 });
 
 export const dot = style({
+  position: 'relative',
   width: '5px',
   height: '5px',
   borderRadius: '50%',
   backgroundColor: vars.color.accent.default,
   flexShrink: 0,
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    borderRadius: '50%',
+    backgroundColor: vars.color.accent.default,
+    animation: `${ping(2.4)} 1.8s ease-out infinite`,
+  },
 });

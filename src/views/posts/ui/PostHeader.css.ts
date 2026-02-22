@@ -3,51 +3,50 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@/shared/styles/contract.css';
 import { space } from '@/shared/styles/spacing';
 import * as typography from '@/shared/styles/typography.css';
-import { responsiveStyle } from '@/shared/ui/media.css';
 
 export const header = style({
-  marginTop: space[8],
+  padding: `${space[24]} 0 ${space[36]}`,
+  borderBottom: `1px solid ${vars.color.border}`,
+  marginBottom: space[40],
 });
 
 export const postMetaWrapper = style({
   display: 'flex',
   alignItems: 'center',
-  columnGap: space[12],
+  gap: space[8],
   marginBottom: space[16],
 });
-
-export const category = style([
-  typography.label,
-  {
-    color: vars.color.text.muted,
-  },
-  responsiveStyle({
-    desktop: {
-      fontSize: '15px',
-    },
-  }),
-]);
 
 export const written = style([
   typography.monoBase,
   {
     color: vars.color.text.muted,
     fontVariantNumeric: 'tabular-nums',
+    letterSpacing: '0.05em',
   },
-  responsiveStyle({
-    desktop: {
-      fontSize: '12px',
-    },
-  }),
 ]);
 
 export const title = style([
   typography.heading1,
   {
     color: vars.color.text.strong,
+    marginBottom: space[20],
   },
 ]);
 
-export const divider = style({
-  margin: `${space[16]} 0`,
+export const tagList = style({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: space[8],
 });
+
+export const tag = style([
+  typography.labelSmall,
+  {
+    color: vars.color.text.subtitle,
+    backgroundColor: vars.color.surfaceSubtitle,
+    padding: '2px 7px',
+    borderRadius: '3px',
+    letterSpacing: '0.01em',
+  },
+]);

@@ -7,20 +7,24 @@ import * as styles from './PostListItem.css';
 
 interface Props {
   title: PostSummary['title'];
-  category: PostSummary['category'];
+  description: PostSummary['description'];
+  tag: PostSummary['tag'];
   written: PostSummary['written'];
 }
 
-function PostListItem({ title, category, written }: Props) {
+function PostListItem({ title, description, tag, written }: Props) {
   return (
     <article className={styles.postListItem}>
-      <div className={styles.header}>
-        <h2 className={styles.title}>{title}</h2>
-        <hr className={styles.divider} />
-        <span className={styles.category}>{category}</span>
+      <div className={styles.top}>
+        {tag.map((t) => (
+          <span key={t} className={styles.categoryTag}>{t}</span>
+        ))}
+        <time className={styles.date}>{getFormattedWrittenDate(written)}</time>
       </div>
-      <time className={styles.written}>{getFormattedWrittenDate(written)}</time>
+      <h2 className={styles.title}>{title}</h2>
+      <p className={styles.description}>{description}</p>
     </article>
   );
 }
+
 export default PostListItem;

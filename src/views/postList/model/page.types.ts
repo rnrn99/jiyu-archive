@@ -1,7 +1,5 @@
-import { PostCategory } from '@/entity/post';
-
-export interface CategoryPageParams {
-  category: PostCategory;
+export interface TagPageParams {
+  tag: string;
 }
 
-export type CategoryPageParamsKey = keyof CategoryPageParams;
+export type TagPageParamsKey = keyof TagPageParams;

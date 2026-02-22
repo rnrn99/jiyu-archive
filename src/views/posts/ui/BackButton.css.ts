@@ -9,11 +9,11 @@ export const button = style([
   {
     display: 'inline-flex',
     alignItems: 'center',
-    columnGap: space[8],
+    gap: space[8],
     border: 'none',
     backgroundColor: 'transparent',
     color: vars.color.text.subtitle,
-    marginTop: space[20],
+    padding: `${space[20]} 0 0`,
     cursor: 'pointer',
     transition: `color ${vars.motion.speed} ${vars.motion.ease}`,
 
@@ -22,3 +22,14 @@ export const button = style([
     },
   },
 ]);
+
+export const icon = style({
+  flexShrink: 0,
+  transition: `transform ${vars.motion.speed} ${vars.motion.ease}`,
+
+  selectors: {
+    [`${button}:hover &`]: {
+      transform: 'translateX(-2px)',
+    },
+  },
+});

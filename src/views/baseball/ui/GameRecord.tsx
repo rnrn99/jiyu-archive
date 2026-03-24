@@ -4,8 +4,9 @@ import { Game, GameEntity, SeasonStats } from '@/entity/baseball';
 import { BaseballConfig } from '@/shared/config';
 
 import * as styles from './GameRecord.css';
+import Heatmap from './Heatmap';
 
-function calculateStats(games: Game[]): SeasonStats {
+const calculateStats = (games: Game[]): SeasonStats => {
   const completed = games.filter((g) => g.status === 'completed');
   return {
     wins: completed.filter((g) => g.result === 'win' || g.result === 'big-win').length,
@@ -13,10 +14,11 @@ function calculateStats(games: Game[]): SeasonStats {
     draws: completed.filter((g) => g.result === 'draw').length,
     total: completed.length,
   };
-}
+};
 
 interface Props {
   games: Game[];
+  heatmapGames: Game[];
   season: number;
 }
 
@@ -42,7 +44,7 @@ function StatGroup({ stats }: { stats: SeasonStats }) {
   );
 }
 
-function GameRecord({ games, season }: Props) {
+function GameRecord({ games, heatmapGames, season }: Props) {
   const teamName = GameEntity.KBO_TEAMS[BaseballConfig.teamCode].name;
 
   const regularStats = calculateStats(games.filter((g) => g.gameType === 'regular'));
@@ -60,7 +62,7 @@ function GameRecord({ games, season }: Props) {
         <StatGroup stats={regularStats} />
       </div>
 
-      {/* Heatmap — 다음 단계에서 추가 */}
+      <Heatmap games={heatmapGames} />
     </section>
   );
 }

@@ -8,7 +8,7 @@ type TeamInfo = {
   game_id_code: string;
 };
 
-type GameRowWithTeams = {
+type GameResultItem = {
   id: number;
   game_id: string;
   game_date: string;
@@ -34,13 +34,14 @@ class BaseballAdapter {
     away_team:teams!away_team_id(game_id_code)
   `;
 
-  /** BaseballConfig.teamCode에 해당하는 DB team id를 반환합니다. */
-  private static getTeamId = cache(async (): Promise<number> => {
+  private static getMyTeamId = cache(async (): Promise<number> => {
     const { data, error } = await supabase
       .from('teams')
       .select('id')
       .eq('game_id_code', BaseballConfig.teamCode)
       .single();
+
+    console.log(data);
 
     if (error || !data) {
       throw new Error(`Team not found for code: ${BaseballConfig.teamCode}`);
@@ -49,7 +50,7 @@ class BaseballAdapter {
     return data.id;
   });
 
-  private static toGame(row: GameRowWithTeams, teamId: number): Game {
+  private static toGame(row: GameResultItem, teamId: number): Game {
     const isHome = row.home_team_id === teamId;
     const opponentCode = (
       isHome ? row.away_team.game_id_code : row.home_team.game_id_code
@@ -79,7 +80,7 @@ class BaseballAdapter {
     };
   }
 
-  /** DB에 저장된 가장 최신 시즌을 반환합니다. */
+  // 가장 최신의 시즌 정보를 가져옵니다.
   static getLatestSeason = cache(async (): Promise<number> => {
     const { data, error } = await supabase
       .from('games')
@@ -95,9 +96,9 @@ class BaseballAdapter {
     return data.season;
   });
 
-  /** BaseballConfig 팀의 특정 시즌 경기 목록을 반환합니다. */
+  // 내 팀의 특정 시즌 경기 목록을 가져옵니다.
   static getGames = cache(async (season: number): Promise<Game[]> => {
-    const teamId = await BaseballAdapter.getTeamId();
+    const teamId = await BaseballAdapter.getMyTeamId();
 
     const { data, error } = await supabase
       .from('games')
@@ -109,12 +110,12 @@ class BaseballAdapter {
     if (error) throw new Error(`Failed to fetch games: ${error.message}`);
     if (!data) return [];
 
-    return (data as GameRowWithTeams[]).map((row) => BaseballAdapter.toGame(row, teamId));
+    return (data as GameResultItem[]).map((row) => BaseballAdapter.toGame(row, teamId));
   });
 
-  /** BaseballConfig 팀의 날짜 범위 경기 목록을 반환합니다. (YYYY-MM-DD) */
+  // 내 팀의 날짜 범위 경기 목록을 가져옵니다. (YYYY-MM-DD)
   static getGamesByDateRange = cache(async (from: string, to: string): Promise<Game[]> => {
-    const teamId = await BaseballAdapter.getTeamId();
+    const teamId = await BaseballAdapter.getMyTeamId();
 
     const { data, error } = await supabase
       .from('games')
@@ -127,7 +128,7 @@ class BaseballAdapter {
     if (error) throw new Error(`Failed to fetch games: ${error.message}`);
     if (!data) return [];
 
-    return (data as GameRowWithTeams[]).map((row) => BaseballAdapter.toGame(row, teamId));
+    return (data as GameResultItem[]).map((row) => BaseballAdapter.toGame(row, teamId));
   });
 }
 

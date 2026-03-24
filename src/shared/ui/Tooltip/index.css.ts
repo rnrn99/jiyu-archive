@@ -27,3 +27,22 @@ export const tooltip = style({
 
   pointerEvents: 'none',
 });
+
+export const tooltipMouseFollow = style({
+  position: 'fixed',
+  transform: 'translateY(-50%)',
+  zIndex: 1000,
+
+  fontFamily: vars.font.mono,
+  fontSize: '10px',
+  letterSpacing: '0.04em',
+  lineHeight: 1.6,
+  whiteSpace: 'nowrap',
+
+  color: '#fff',
+  backgroundColor: vars.color.text.strong,
+  padding: '4px 8px',
+  borderRadius: '4px',
+
+  pointerEvents: 'none',
+});

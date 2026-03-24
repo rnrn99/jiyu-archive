@@ -1,5 +1,6 @@
 import { BaseballAdapter } from '@/feature/baseball';
 import { BaseballConfig } from '@/shared/config';
+import { toLocalDateStr } from '@/shared/lib/date';
 import { GameRecord, styles } from '@/views/baseball';
 
 export const revalidate = 3600;
@@ -11,12 +12,15 @@ export default async function BaseballPage() {
   const heatmapStart = new Date(today);
   heatmapStart.setDate(heatmapStart.getDate() - BaseballConfig.heatmapWeeks * 7);
 
-  const todayStr = today.toISOString().slice(0, 10);
-  const heatmapStartStr = heatmapStart.toISOString().slice(0, 10);
+  const weekEnd = new Date(today);
+  weekEnd.setDate(today.getDate() + ((7 - today.getDay()) % 7));
+
+  const heatmapStartStr = toLocalDateStr(heatmapStart);
+  const weekEndStr = toLocalDateStr(weekEnd);
 
   const [season, heatmapGames] = await Promise.all([
     BaseballAdapter.getLatestSeason(),
-    BaseballAdapter.getGamesByDateRange(heatmapStartStr, todayStr),
+    BaseballAdapter.getGamesByDateRange(heatmapStartStr, weekEndStr),
   ]);
 
   const games = await BaseballAdapter.getGames(season);

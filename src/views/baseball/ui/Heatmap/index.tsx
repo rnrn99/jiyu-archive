@@ -8,10 +8,10 @@ import { Game } from '@/entity/baseball';
 import { useMounted } from '@/shared/hooks';
 
 import DayCell from './DayCell';
-import { buildHeatmapGrid, DAY_LABEL_MAP } from './grid';
 import * as styles from './index.css';
 import TooltipContent from './TooltipContent';
 import { HeatmapDay } from './types';
+import { buildHeatmapGrid, DAY_LABEL_MAP } from './utils';
 
 interface Props {
   games: Game[];
@@ -117,10 +117,15 @@ function Heatmap({ games }: Props) {
 
         <div className={styles.legendSep} />
 
-        {/* 경기 없음 */}
+        {/* 경기 없음 / 예정됨 */}
         <div className={styles.legendGroup}>
           <div className={styles.legendCellVariants.empty} />
           <span className={styles.legendText}>없음</span>
+        </div>
+
+        <div className={styles.legendGroup}>
+          <div className={styles.legendCellVariants.scheduled} />
+          <span className={styles.legendText}>예정</span>
         </div>
 
         <div className={styles.legendSep} />

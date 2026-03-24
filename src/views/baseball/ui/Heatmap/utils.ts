@@ -1,15 +1,16 @@
 import { Game } from '@/entity/baseball';
 import { BaseballConfig } from '@/shared/config';
+import { toLocalDateStr } from '@/shared/lib/date';
 
-import { HeatmapDay, HeatmapGrid, HeatmapWeek } from './types';
+import { CellVariant, GameInfo, HeatmapDay, HeatmapGrid, HeatmapWeek } from './types';
 
 export const CELL_SIZE = 16;
 const WEEKS = BaseballConfig.heatmapWeeks;
 
 export const DAY_LABEL_MAP: Record<number, string> = {
-  1: '월',
-  3: '수',
-  5: '금',
+  1: '화',
+  4: '금',
+  6: '일',
 };
 
 const MONTH_NAMES = [
@@ -27,23 +28,16 @@ const MONTH_NAMES = [
   '12월',
 ];
 
-const toLocalDateStr = (date: Date): string => {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-};
-
 export const buildHeatmapGrid = (games: Game[]): HeatmapGrid => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  // 이번 주 토요일 (grid 끝)
+  // 이번 주 일요일 (grid 끝, 월~일 기준)
   const endDow = today.getDay();
   const end = new Date(today);
-  end.setDate(today.getDate() + (6 - endDow));
+  end.setDate(today.getDate() + ((7 - endDow) % 7));
 
-  // WEEKS주 전 일요일 (grid 시작)
+  // WEEKS주 전 월요일 (grid 시작)
   const start = new Date(end);
   start.setDate(end.getDate() - (WEEKS - 1) * 7 - 6);
 
@@ -73,11 +67,11 @@ export const buildHeatmapGrid = (games: Game[]): HeatmapGrid => {
     for (let dow = 0; dow < 7; dow++) {
       const dateStr = toLocalDateStr(cursor);
       const isFuture = cursor > today;
+      const allGames = gamesByDate.get(dateStr) ?? [];
 
       week.push({
         date: dateStr,
-        games: isFuture ? [] : (gamesByDate.get(dateStr) ?? []),
-        isFuture,
+        games: isFuture ? allGames.filter((g) => g.status === 'scheduled') : allGames,
       } satisfies HeatmapDay);
 
       cursor.setDate(cursor.getDate() + 1);
@@ -96,4 +90,15 @@ export const buildHeatmapGrid = (games: Game[]): HeatmapGrid => {
   });
 
   return { weeks, monthLabels };
+};
+
+export const getCellVariant = (game: Game): CellVariant => {
+  if (game.status === 'canceled') return 'canceled';
+  if (game.status === 'scheduled') return 'scheduled';
+  if (game.result === null) return 'empty';
+  return game.result;
+};
+
+export const hasGameInfo = (cellVariant: CellVariant): cellVariant is GameInfo => {
+  return cellVariant !== 'empty';
 };

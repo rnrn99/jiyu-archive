@@ -119,6 +119,21 @@ export const week = style({
 });
 
 /**
+ * ======== CELL COLORS ========
+ */
+
+const CELL_COLORS = {
+  'big-win': '#FF6600',
+  win: '#FFAA77',
+  draw: '#e8d5b0',
+  lose: '#90B8D8',
+  'big-lose': '#5A8AB0',
+  canceled: '#E0E0E0',
+  scheduled: '#C8C8C8',
+  empty: '#EBEBEB',
+} as const;
+
+/**
  * ======== CELL ========
  */
 
@@ -132,79 +147,22 @@ const cellBase = style({
   transition: 'filter .12s, transform .12s',
 });
 
+const interactiveCell = {
+  cursor: 'pointer',
+  selectors: {
+    '&:hover': { filter: 'brightness(.82)', transform: 'scale(1.3)', zIndex: 10 },
+  },
+} as const;
+
 export const cellVariants = styleVariants({
-  'big-win': [
-    cellBase,
-    {
-      background: '#FF6600',
-      cursor: 'pointer',
-      selectors: {
-        '&:hover': { filter: 'brightness(.82)', transform: 'scale(1.3)', zIndex: 10 },
-      },
-    },
-  ],
-  win: [
-    cellBase,
-    {
-      background: '#FFAA77',
-      cursor: 'pointer',
-      selectors: {
-        '&:hover': { filter: 'brightness(.82)', transform: 'scale(1.3)', zIndex: 10 },
-      },
-    },
-  ],
-  draw: [
-    cellBase,
-    {
-      background: '#e8d5b0',
-      cursor: 'pointer',
-      selectors: {
-        '&:hover': { filter: 'brightness(.82)', transform: 'scale(1.3)', zIndex: 10 },
-      },
-    },
-  ],
-  lose: [
-    cellBase,
-    {
-      background: '#90B8D8',
-      cursor: 'pointer',
-      selectors: {
-        '&:hover': { filter: 'brightness(.82)', transform: 'scale(1.3)', zIndex: 10 },
-      },
-    },
-  ],
-  'big-lose': [
-    cellBase,
-    {
-      background: '#5A8AB0',
-      cursor: 'pointer',
-      selectors: {
-        '&:hover': { filter: 'brightness(.82)', transform: 'scale(1.3)', zIndex: 10 },
-      },
-    },
-  ],
-  canceled: [
-    cellBase,
-    {
-      background: '#E0E0E0',
-      opacity: 0.5,
-      cursor: 'pointer',
-      selectors: {
-        '&:hover': { filter: 'brightness(.82)', transform: 'scale(1.3)', zIndex: 10 },
-      },
-    },
-  ],
-  scheduled: [cellBase, { background: vars.color.border }],
-  empty: [cellBase, { background: '#E0E0E0' }],
-  'future-empty': [
-    cellBase,
-    {
-      background: 'transparent',
-      selectors: {
-        '&:hover': { filter: 'none', transform: 'none' },
-      },
-    },
-  ],
+  'big-win': [cellBase, { background: CELL_COLORS['big-win'], ...interactiveCell }],
+  win: [cellBase, { background: CELL_COLORS.win, ...interactiveCell }],
+  draw: [cellBase, { background: CELL_COLORS.draw, ...interactiveCell }],
+  lose: [cellBase, { background: CELL_COLORS.lose, ...interactiveCell }],
+  'big-lose': [cellBase, { background: CELL_COLORS['big-lose'], ...interactiveCell }],
+  canceled: [cellBase, { background: CELL_COLORS.canceled, opacity: 0.5, ...interactiveCell }],
+  scheduled: [cellBase, { background: CELL_COLORS.scheduled, ...interactiveCell }],
+  empty: [cellBase, { background: CELL_COLORS.empty }],
 });
 
 /**
@@ -235,14 +193,14 @@ const cellHalfBase = style({
 });
 
 export const cellHalfVariants = styleVariants({
-  'big-win': [cellHalfBase, { background: '#FF6600' }],
-  win: [cellHalfBase, { background: '#FFAA77' }],
-  draw: [cellHalfBase, { background: '#e8d5b0' }],
-  lose: [cellHalfBase, { background: '#90B8D8' }],
-  'big-lose': [cellHalfBase, { background: '#5A8AB0' }],
-  canceled: [cellHalfBase, { background: '#E0E0E0', opacity: 0.5 }],
-  scheduled: [cellHalfBase, { background: vars.color.border }],
-  empty: [cellHalfBase, { background: '#E0E0E0' }],
+  'big-win': [cellHalfBase, { background: CELL_COLORS['big-win'] }],
+  win: [cellHalfBase, { background: CELL_COLORS.win }],
+  draw: [cellHalfBase, { background: CELL_COLORS.draw }],
+  lose: [cellHalfBase, { background: CELL_COLORS.lose }],
+  'big-lose': [cellHalfBase, { background: CELL_COLORS['big-lose'] }],
+  canceled: [cellHalfBase, { background: CELL_COLORS.canceled, opacity: 0.5 }],
+  scheduled: [cellHalfBase, { background: CELL_COLORS.scheduled }],
+  empty: [cellHalfBase, { background: CELL_COLORS.empty }],
 });
 
 /**
@@ -275,13 +233,18 @@ export const tooltipDate = style({
   marginBottom: '2px',
 });
 
-export const tooltipResultVariants = styleVariants({
-  'big-win': { display: 'block', fontWeight: 700, color: '#FF8833' },
-  win: { display: 'block', fontWeight: 700, color: '#FFAA77' },
-  draw: { display: 'block', fontWeight: 700, color: '#b07020' },
-  lose: { display: 'block', fontWeight: 700, color: '#90B8D8' },
-  'big-lose': { display: 'block', fontWeight: 700, color: '#7aaac8' },
-});
+export const tooltipResultVariants = styleVariants(
+  {
+    'big-win': { color: CELL_COLORS.win },
+    win: { color: CELL_COLORS.win },
+    draw: { color: CELL_COLORS.draw },
+    lose: { color: CELL_COLORS.lose },
+    'big-lose': { color: CELL_COLORS.lose },
+    scheduled: { color: CELL_COLORS.scheduled },
+    canceled: { color: CELL_COLORS.canceled },
+  },
+  (variant) => ({ display: 'block', fontWeight: 700, ...variant }),
+);
 
 export const tooltipScore = style({
   display: 'block',
@@ -340,16 +303,17 @@ const legendCellBase = style({
 });
 
 export const legendCellVariants = styleVariants({
-  'big-lose': [legendCellBase, { background: '#5A8AB0' }],
-  lose: [legendCellBase, { background: '#90B8D8' }],
-  draw: [legendCellBase, { background: '#e8d5b0' }],
-  win: [legendCellBase, { background: '#FFAA77' }],
-  'big-win': [legendCellBase, { background: '#FF6600' }],
-  empty: [legendCellBase, { background: '#E0E0E0' }],
+  'big-lose': [legendCellBase, { background: CELL_COLORS['big-lose'] }],
+  lose: [legendCellBase, { background: CELL_COLORS.lose }],
+  draw: [legendCellBase, { background: CELL_COLORS.draw }],
+  win: [legendCellBase, { background: CELL_COLORS.win }],
+  'big-win': [legendCellBase, { background: CELL_COLORS['big-win'] }],
+  empty: [legendCellBase, { background: CELL_COLORS.empty }],
+  scheduled: [legendCellBase, { background: CELL_COLORS.scheduled }],
   visited: [
     legendCellBase,
     {
-      background: '#FFAA77',
+      background: CELL_COLORS.win,
       selectors: {
         '&::after': {
           content: '""',

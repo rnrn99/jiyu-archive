@@ -1,11 +1,11 @@
 import { Game, GameResult } from '@/entity/baseball';
 
-export type CellVariant = GameResult | 'canceled' | 'scheduled' | 'empty' | 'future-empty';
+export type CellVariant = GameResult | 'canceled' | 'scheduled' | 'empty';
+export type GameInfo = Exclude<CellVariant, 'empty'>;
 
 export interface HeatmapDay {
   date: string; // 'YYYY-MM-DD'
   games: Game[];
-  isFuture: boolean;
 }
 
 export type HeatmapWeek = HeatmapDay[];

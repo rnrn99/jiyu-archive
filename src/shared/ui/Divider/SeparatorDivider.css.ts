@@ -10,4 +10,5 @@ export const separatorDivider = style({
   color: separatorDividerVars.color,
   margin: `0 ${separatorDividerVars.gap}`,
   fontSize: separatorDividerVars.size,
+  lineHeight: 1,
 });

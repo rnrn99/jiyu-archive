@@ -1,0 +1,30 @@
+import { BaseballAdapter } from '@/feature/baseball';
+import { BaseballConfig } from '@/shared/config';
+import { GameRecord, styles } from '@/views/baseball';
+
+export const revalidate = 3600;
+
+export default async function BaseballPage() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const heatmapStart = new Date(today);
+  heatmapStart.setDate(heatmapStart.getDate() - BaseballConfig.heatmapWeeks * 7);
+
+  const todayStr = today.toISOString().slice(0, 10);
+  const heatmapStartStr = heatmapStart.toISOString().slice(0, 10);
+
+  const [season, heatmapGames] = await Promise.all([
+    BaseballAdapter.getLatestSeason(),
+    BaseballAdapter.getGamesByDateRange(heatmapStartStr, todayStr),
+  ]);
+
+  const games = await BaseballAdapter.getGames(season);
+
+  return (
+    <article className={styles.article}>
+      <GameRecord games={games} heatmapGames={heatmapGames} season={season} />
+      <p className={styles.toBeContinued}>to be continued...</p>
+    </article>
+  );
+}

@@ -24,6 +24,7 @@ export default async function BaseballPage() {
   return (
     <article className={styles.article}>
       <GameRecord games={games} heatmapGames={heatmapGames} season={season} />
+      <p className={styles.toBeContinued}>to be continued...</p>
     </article>
   );
 }

@@ -8,7 +8,7 @@ interface Props {
 
 function Layout({ top, children }: PropsWithChildren<Props>) {
   return (
-    <main>
+    <main className={styles.main}>
       {top}
       <article className={styles.layout}>{children}</article>
     </main>

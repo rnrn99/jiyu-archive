@@ -41,8 +41,6 @@ class BaseballAdapter {
       .eq('game_id_code', BaseballConfig.teamCode)
       .single();
 
-    console.log(data);
-
     if (error || !data) {
       throw new Error(`Team not found for code: ${BaseballConfig.teamCode}`);
     }

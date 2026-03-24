@@ -34,11 +34,12 @@ function TooltipContent({ day }: Props) {
       {games.map((game, i) => {
         const variant = getCellVariant(game);
         const isHome = game.isHome ? '홈' : '원정';
+        const opponentInfo = `vs ${game.opponent} · ${game.stadium ?? isHome}`;
 
         if (game.status === 'canceled') {
           return (
             <span key={i} className={styles.tooltipGame}>
-              취소 · vs {game.opponent}
+              취소 · {opponentInfo}
             </span>
           );
         }
@@ -46,7 +47,7 @@ function TooltipContent({ day }: Props) {
         if (game.status === 'scheduled') {
           return (
             <span key={i} className={styles.tooltipGame}>
-              예정 · vs {game.opponent} · {isHome}
+              예정 · {opponentInfo}
             </span>
           );
         }
@@ -66,9 +67,7 @@ function TooltipContent({ day }: Props) {
             <span className={styles.tooltipScore}>
               {myScore} : {opponentScore}
             </span>
-            <span className={styles.tooltipInfo}>
-              vs {game.opponent} · {isHome}
-            </span>
+            <span className={styles.tooltipInfo}>{opponentInfo}</span>
           </span>
         );
       })}

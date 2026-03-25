@@ -8,10 +8,13 @@ import { Game } from '@/entity/baseball';
 import { useMounted } from '@/shared/hooks';
 
 import DayCell from './DayCell';
+import DayLabel from './DayLabel';
 import * as styles from './index.css';
+import Legend from './Legend';
+import MonthLabel from './MonthLabel';
 import TooltipContent from './TooltipContent';
 import { HeatmapDay } from './types';
-import { buildHeatmapGrid, DAY_LABEL_MAP } from './utils';
+import { buildHeatmapGrid } from './utils';
 
 interface Props {
   games: Game[];
@@ -22,12 +25,6 @@ function Heatmap({ games }: Props) {
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const mounted = useMounted();
   const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (gridRef.current) {
-      gridRef.current.scrollLeft = gridRef.current.scrollWidth;
-    }
-  }, []);
 
   const { weeks, monthLabels } = buildHeatmapGrid(games);
 
@@ -44,47 +41,21 @@ function Heatmap({ games }: Props) {
     setHoveredDay(null);
   };
 
-  const dayLabelItems = Array.from({ length: 7 }, (_, i) => ({
-    dow: i,
-    label: DAY_LABEL_MAP[i] ?? null,
-  }));
+  useEffect(() => {
+    if (gridRef.current) {
+      gridRef.current.scrollLeft = gridRef.current.scrollWidth;
+    }
+  }, []);
 
   return (
-    <div className={styles.heatmapSection}>
-      {/* 섹션 헤더 */}
-      <div className={styles.heatmapHeader}>
-        <span className={styles.heatmapTitle}>경기 결과</span>
-      </div>
-
-      {/* 히트맵 그리드 */}
+    <>
       <div className={styles.heatmap} ref={gridRef}>
         <div className={styles.gridWrapper}>
-          {/* 요일 레이블 컬럼 */}
-          <div className={styles.dayLabels}>
-            <div className={styles.monthLabelSpacer} />
-            {dayLabelItems.map(({ dow, label }) =>
-              label ? (
-                <div key={dow} className={styles.dayLabelText}>
-                  {label}
-                </div>
-              ) : (
-                <div key={dow} className={styles.dayLabelEmpty} />
-              ),
-            )}
-          </div>
+          <DayLabel />
 
-          {/* 월 레이블 + 주 그리드 */}
           <div className={styles.weeksWrapper}>
-            {/* 월 레이블 행 */}
-            <div className={styles.monthLabelsRow}>
-              {monthLabels.map(({ label, width, startWeek }) => (
-                <span key={startWeek} className={styles.monthLabel} style={{ width }}>
-                  {label}
-                </span>
-              ))}
-            </div>
+            <MonthLabel monthLabels={monthLabels} />
 
-            {/* 주 그리드 */}
             <div className={styles.weeks}>
               {weeks.map((week, wi) => (
                 <div key={wi} className={styles.week}>
@@ -104,38 +75,7 @@ function Heatmap({ games }: Props) {
         </div>
       </div>
 
-      {/* 범례 */}
-      <div className={styles.legendWrapper}>
-        {/* 결과 색상 */}
-        <div className={styles.legendGroup}>
-          <span className={styles.legendText}>패</span>
-          {(['big-lose', 'lose', 'draw', 'win', 'big-win'] as const).map((v) => (
-            <div key={v} className={styles.legendCellVariants[v]} />
-          ))}
-          <span className={styles.legendText}>승</span>
-        </div>
-
-        <div className={styles.legendSep} />
-
-        {/* 경기 없음 / 예정됨 */}
-        <div className={styles.legendGroup}>
-          <div className={styles.legendCellVariants.empty} />
-          <span className={styles.legendText}>없음</span>
-        </div>
-
-        <div className={styles.legendGroup}>
-          <div className={styles.legendCellVariants.scheduled} />
-          <span className={styles.legendText}>예정</span>
-        </div>
-
-        <div className={styles.legendSep} />
-
-        {/* 직관 */}
-        <div className={styles.legendGroup}>
-          <div className={styles.legendCellVariants.visited} />
-          <span className={styles.legendText}>직관</span>
-        </div>
-      </div>
+      <Legend />
 
       {/* Tooltip */}
       {hoveredDay &&
@@ -146,7 +86,7 @@ function Heatmap({ games }: Props) {
           </div>,
           document.body,
         )}
-    </div>
+    </>
   );
 }
 

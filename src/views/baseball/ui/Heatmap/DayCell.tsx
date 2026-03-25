@@ -1,6 +1,6 @@
 'use client';
 
-import * as styles from './index.css';
+import * as styles from './DayCell.css';
 import { HeatmapDay } from './types';
 import { getCellVariant } from './utils';
 

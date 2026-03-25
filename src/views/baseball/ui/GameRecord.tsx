@@ -62,7 +62,13 @@ function GameRecord({ games, heatmapGames, season }: Props) {
         <StatGroup stats={regularStats} />
       </div>
 
-      <Heatmap games={heatmapGames} />
+      <div className={styles.heatmapSection}>
+        <div className={styles.heatmapHeader}>
+          <span className={styles.heatmapTitle}>경기 결과</span>
+        </div>
+
+        <Heatmap games={heatmapGames} />
+      </div>
     </section>
   );
 }

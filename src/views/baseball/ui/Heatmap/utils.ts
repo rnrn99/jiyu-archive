@@ -4,15 +4,6 @@ import { toLocalDateStr } from '@/shared/lib/date';
 
 import { CellVariant, GameInfo, HeatmapDay, HeatmapGrid, HeatmapWeek } from './types';
 
-export const CELL_SIZE = 16;
-const WEEKS = BaseballConfig.heatmapWeeks;
-
-export const DAY_LABEL_MAP: Record<number, string> = {
-  1: '화',
-  4: '금',
-  6: '일',
-};
-
 const MONTH_NAMES = [
   '1월',
   '2월',
@@ -28,6 +19,8 @@ const MONTH_NAMES = [
   '12월',
 ];
 
+const CELL_SIZE = 16;
+const WEEKS = BaseballConfig.heatmapWeeks;
 export const buildHeatmapGrid = (games: Game[]): HeatmapGrid => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);

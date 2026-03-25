@@ -100,3 +100,20 @@ export const statSeparator = style({
   marginBottom: '2px',
   flexShrink: 0,
 });
+
+export const heatmapSection = style({
+  paddingTop: '24px',
+  paddingBottom: '28px',
+});
+
+export const heatmapHeader = style({
+  marginBottom: '14px',
+});
+
+export const heatmapTitle = style({
+  fontFamily: vars.font.mono,
+  fontSize: '10px',
+  letterSpacing: '0.1em',
+  textTransform: 'uppercase',
+  color: vars.color.text.muted,
+});

@@ -1,6 +1,6 @@
 'use client';
 
-import * as styles from './index.css';
+import * as styles from './TooltipContent.css';
 import { GameInfo, HeatmapDay } from './types';
 import { getCellVariant, hasGameInfo } from './utils';
 

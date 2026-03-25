@@ -1,15 +1,17 @@
 'use client';
 
-import { getCellVariant } from './DayCell';
-import * as styles from './index.css';
-import { HeatmapDay } from './types';
+import * as styles from './TooltipContent.css';
+import { GameInfo, HeatmapDay } from './types';
+import { getCellVariant, hasGameInfo } from './utils';
 
-const RESULT_LABEL: Record<string, string> = {
+const VARIANT_LABEL: Record<GameInfo, string> = {
   'big-win': '승',
   win: '승',
   draw: '무',
   lose: '패',
   'big-lose': '패',
+  canceled: '취소',
+  scheduled: '예정',
 };
 
 const formatDate = (dateStr: string): string => {
@@ -34,41 +36,25 @@ function TooltipContent({ day }: Props) {
       {games.map((game, i) => {
         const variant = getCellVariant(game);
         const isHome = game.isHome ? '홈' : '원정';
+        const opponentInfo = `vs ${game.opponent} · ${game.stadium ?? isHome}`;
 
-        if (game.status === 'canceled') {
-          return (
-            <span key={i} className={styles.tooltipGame}>
-              취소 · vs {game.opponent}
-            </span>
-          );
-        }
+        const gameInfo = hasGameInfo(variant) ? variant : null;
+        const label = gameInfo ? VARIANT_LABEL[gameInfo] : '';
+        const labelClass = gameInfo ? styles.tooltipResultVariants[gameInfo] : null;
 
-        if (game.status === 'scheduled') {
-          return (
-            <span key={i} className={styles.tooltipGame}>
-              예정 · vs {game.opponent} · {isHome}
-            </span>
-          );
-        }
-
+        const isCompleted = game.status === 'completed';
         const myScore = game.isHome ? game.homeScore : game.awayScore;
         const opponentScore = game.isHome ? game.awayScore : game.homeScore;
-        const resultLabel = RESULT_LABEL[variant] ?? '';
-        const resultVariant = variant as keyof typeof styles.tooltipResultVariants;
-        const resultClass =
-          resultVariant in styles.tooltipResultVariants
-            ? styles.tooltipResultVariants[resultVariant]
-            : undefined;
 
         return (
           <span key={i}>
-            {resultClass && <span className={resultClass}>{resultLabel}</span>}
-            <span className={styles.tooltipScore}>
-              {myScore} : {opponentScore}
-            </span>
-            <span className={styles.tooltipInfo}>
-              vs {game.opponent} · {isHome}
-            </span>
+            {labelClass && <span className={labelClass}>{label}</span>}
+            {isCompleted && (
+              <span className={styles.tooltipScore}>
+                {myScore} : {opponentScore}
+              </span>
+            )}
+            <span className={styles.tooltipInfo}>{opponentInfo}</span>
           </span>
         );
       })}

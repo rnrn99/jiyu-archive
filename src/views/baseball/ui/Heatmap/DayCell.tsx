@@ -1,16 +1,8 @@
 'use client';
 
-import { Game } from '@/entity/baseball';
-
-import * as styles from './index.css';
-import { CellVariant, HeatmapDay } from './types';
-
-export const getCellVariant = (game: Game): CellVariant => {
-  if (game.status === 'canceled') return 'canceled';
-  if (game.status === 'scheduled') return 'scheduled';
-  if (game.result === null) return 'empty';
-  return game.result;
-};
+import * as styles from './DayCell.css';
+import { HeatmapDay } from './types';
+import { getCellVariant } from './utils';
 
 interface Props {
   day: HeatmapDay;
@@ -20,13 +12,9 @@ interface Props {
 }
 
 function DayCell({ day, onEnter, onMove, onLeave }: Props) {
-  const { games, isFuture } = day;
+  const { games } = day;
 
-  if (isFuture) {
-    return <div className={styles.cellVariants['future-empty']} />;
-  }
-
-  // 더블헤더 (같은 날 2경기)
+  // 더블헤더
   if (games.length >= 2) {
     const [g1, g2] = games;
     const v1 = getCellVariant(g1);

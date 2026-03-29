@@ -4,6 +4,29 @@ import { vars } from '@/shared/styles';
 
 import { CELL_COLORS } from './styles';
 
+export const TOOLTIP_MAX_WIDTH = 100;
+
+export const tooltip = style({
+  position: 'fixed',
+  transform: 'translate(10px, -50%)',
+  zIndex: 1,
+
+  fontFamily: vars.font.sans,
+  fontSize: '11px',
+  lineHeight: 1.6,
+  whiteSpace: 'nowrap',
+  maxWidth: TOOLTIP_MAX_WIDTH,
+
+  color: '#fff',
+  backgroundColor: vars.color.text.strong,
+  padding: '8px 12px',
+  borderRadius: '6px',
+});
+
+export const tooltipLeft = style({
+  transform: 'translate(calc(-100% - 10px), -50%)',
+});
+
 export const tooltipDate = style({
   display: 'block',
   fontFamily: vars.font.mono,

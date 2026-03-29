@@ -9,10 +9,10 @@ import { useMounted } from '@/shared/hooks';
 
 import DayCell from './DayCell';
 import DayLabel from './DayLabel';
+import GameInfoTooltip from './GameInfoTooltip';
 import * as styles from './index.css';
 import Legend from './Legend';
 import MonthLabel from './MonthLabel';
-import TooltipContent from './TooltipContent';
 import { HeatmapDay } from './types';
 import { buildHeatmapGrid } from './utils';
 
@@ -77,15 +77,9 @@ function Heatmap({ games }: Props) {
 
       <Legend />
 
-      {/* Tooltip */}
       {hoveredDay &&
         mounted &&
-        createPortal(
-          <div className={styles.floatingTooltip} style={{ left: tooltipPos.x, top: tooltipPos.y }}>
-            <TooltipContent day={hoveredDay} />
-          </div>,
-          document.body,
-        )}
+        createPortal(<GameInfoTooltip day={hoveredDay} tooltipPos={tooltipPos} />, document.body)}
     </>
   );
 }

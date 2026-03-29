@@ -4,6 +4,24 @@ import { vars } from '@/shared/styles';
 
 import { CELL_COLORS } from './styles';
 
+export const tooltip = style({
+  position: 'fixed',
+  transform: 'translate(10px, -50%)',
+  zIndex: 1000,
+
+  fontFamily: vars.font.sans,
+  fontSize: '11px',
+  lineHeight: 1.6,
+  whiteSpace: 'nowrap',
+
+  color: '#fff',
+  backgroundColor: vars.color.text.strong,
+  padding: '8px 12px',
+  borderRadius: '6px',
+
+  pointerEvents: 'none',
+});
+
 export const tooltipDate = style({
   display: 'block',
   fontFamily: vars.font.mono,

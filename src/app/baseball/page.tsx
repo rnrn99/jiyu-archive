@@ -3,7 +3,7 @@ import { BaseballConfig } from '@/shared/config';
 import { toLocalDateStr } from '@/shared/lib/date';
 import { GameRecord, styles } from '@/views/baseball';
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 export default async function BaseballPage() {
   const today = new Date();

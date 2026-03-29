@@ -1,5 +1,7 @@
 'use client';
 
+import clsx from 'clsx';
+
 import * as styles from './GameInfoTooltip.css';
 import { GameInfo, HeatmapDay } from './types';
 import { getCellVariant, hasGameInfo } from './utils';
@@ -22,13 +24,20 @@ const formatDate = (dateStr: string): string => {
 interface Props {
   day: HeatmapDay;
   tooltipPos: { x: number; y: number };
+  flipLeft?: boolean;
 }
 
-function GameInfoTooltip({ day, tooltipPos }: Props) {
+function GameInfoTooltip({ day, tooltipPos, flipLeft }: Props) {
   const { date, games } = day;
+  const tooltipClass = clsx(styles.tooltip, flipLeft && styles.tooltipLeft);
 
   return (
-    <div className={styles.tooltip} style={{ left: tooltipPos.x, top: tooltipPos.y }}>
+    <div
+      className={tooltipClass}
+      style={{ left: tooltipPos.x, top: tooltipPos.y }}
+      onClick={(e) => e.stopPropagation()}
+      onTouchStart={(e) => e.stopPropagation()}
+    >
       <span className={styles.tooltipDate}>{formatDate(date)}</span>
       {!!games.length && (
         <>

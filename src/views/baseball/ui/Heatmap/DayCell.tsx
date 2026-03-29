@@ -9,9 +9,10 @@ interface Props {
   onEnter: (day: HeatmapDay, e: React.MouseEvent) => void;
   onMove: (e: React.MouseEvent) => void;
   onLeave: () => void;
+  onTouchStart: (day: HeatmapDay, e: React.TouchEvent) => void;
 }
 
-function DayCell({ day, onEnter, onMove, onLeave }: Props) {
+function DayCell({ day, onEnter, onMove, onLeave, onTouchStart }: Props) {
   const { games } = day;
 
   // 더블헤더
@@ -33,6 +34,7 @@ function DayCell({ day, onEnter, onMove, onLeave }: Props) {
         onMouseEnter={(e) => onEnter(day, e)}
         onMouseMove={onMove}
         onMouseLeave={onLeave}
+        onTouchStart={(e) => onTouchStart(day, e)}
       >
         <div className={half1} />
         <div className={half2} />
@@ -48,6 +50,7 @@ function DayCell({ day, onEnter, onMove, onLeave }: Props) {
         onMouseEnter={(e) => onEnter(day, e)}
         onMouseMove={onMove}
         onMouseLeave={onLeave}
+        onTouchStart={(e) => onTouchStart(day, e)}
       />
     );
   }
@@ -63,6 +66,7 @@ function DayCell({ day, onEnter, onMove, onLeave }: Props) {
       onMouseEnter={(e) => onEnter(day, e)}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
+      onTouchStart={(e) => onTouchStart(day, e)}
     />
   );
 }

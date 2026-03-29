@@ -10,11 +10,14 @@ import { useMounted } from '@/shared/hooks';
 import DayCell from './DayCell';
 import DayLabel from './DayLabel';
 import GameInfoTooltip from './GameInfoTooltip';
+import { TOOLTIP_MAX_WIDTH } from './GameInfoTooltip.css';
 import * as styles from './index.css';
 import Legend from './Legend';
 import MonthLabel from './MonthLabel';
 import { HeatmapDay } from './types';
 import { buildHeatmapGrid } from './utils';
+
+const computeFlipLeft = (clientX: number) => clientX + TOOLTIP_MAX_WIDTH > window.innerWidth;
 
 interface Props {
   games: Game[];
@@ -28,10 +31,14 @@ function Heatmap({ games }: Props) {
 
   const { weeks, monthLabels } = buildHeatmapGrid(games);
 
-  const handleEnter = (day: HeatmapDay, e: React.MouseEvent) => {
+  const flipLeft = computeFlipLeft(tooltipPos.x);
+
+  const openTooltip = (day: HeatmapDay, clientX: number, clientY: number) => {
     setHoveredDay(day);
-    setTooltipPos({ x: e.clientX, y: e.clientY });
+    setTooltipPos({ x: clientX, y: clientY });
   };
+
+  const handleEnter = (day: HeatmapDay, e: React.MouseEvent) => openTooltip(day, e.clientX, e.clientY);
 
   const handleMove = (e: React.MouseEvent) => {
     setTooltipPos({ x: e.clientX, y: e.clientY });
@@ -41,10 +48,22 @@ function Heatmap({ games }: Props) {
     setHoveredDay(null);
   };
 
+  const handleTouchStart = (day: HeatmapDay, e: React.TouchEvent) => {
+    e.stopPropagation();
+    const touch = e.touches[0];
+    openTooltip(day, touch.clientX, touch.clientY);
+  };
+
   useEffect(() => {
     if (gridRef.current) {
       gridRef.current.scrollLeft = gridRef.current.scrollWidth;
     }
+  }, []);
+
+  useEffect(() => {
+    const handleOutside = () => setHoveredDay(null);
+    document.addEventListener('touchstart', handleOutside);
+    return () => document.removeEventListener('touchstart', handleOutside);
   }, []);
 
   return (
@@ -66,6 +85,7 @@ function Heatmap({ games }: Props) {
                       onEnter={handleEnter}
                       onMove={handleMove}
                       onLeave={handleLeave}
+                      onTouchStart={handleTouchStart}
                     />
                   ))}
                 </div>
@@ -79,7 +99,10 @@ function Heatmap({ games }: Props) {
 
       {hoveredDay &&
         mounted &&
-        createPortal(<GameInfoTooltip day={hoveredDay} tooltipPos={tooltipPos} />, document.body)}
+        createPortal(
+          <GameInfoTooltip day={hoveredDay} tooltipPos={tooltipPos} flipLeft={flipLeft} />,
+          document.body,
+        )}
     </>
   );
 }

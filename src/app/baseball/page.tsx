@@ -18,16 +18,17 @@ export default async function BaseballPage() {
   const heatmapStartStr = toLocalDateStr(heatmapStart);
   const weekEndStr = toLocalDateStr(weekEnd);
 
-  const [season, heatmapGames] = await Promise.all([
+  const [season, heatmapGames, watchedGameIds] = await Promise.all([
     BaseballAdapter.getLatestSeason(),
     BaseballAdapter.getGamesByDateRange(heatmapStartStr, weekEndStr),
+    BaseballAdapter.getWatchedGameIds(),
   ]);
 
   const games = await BaseballAdapter.getGames(season);
 
   return (
     <article className={styles.article}>
-      <GameRecord games={games} heatmapGames={heatmapGames} season={season} />
+      <GameRecord games={games} heatmapGames={heatmapGames} season={season} watchedGameIds={watchedGameIds} />
       <p className={styles.toBeContinued}>to be continued...</p>
     </article>
   );

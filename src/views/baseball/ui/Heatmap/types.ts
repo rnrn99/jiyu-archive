@@ -6,6 +6,7 @@ export type GameInfo = Exclude<CellVariant, 'empty'>;
 export interface HeatmapDay {
   date: string; // 'YYYY-MM-DD'
   games: Game[];
+  watchedIds: Set<string>;
 }
 
 export type HeatmapWeek = HeatmapDay[];

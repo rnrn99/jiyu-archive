@@ -13,7 +13,7 @@ interface Props {
 }
 
 function DayCell({ day, onEnter, onMove, onLeave, onTouchStart }: Props) {
-  const { games } = day;
+  const { games, watchedIds } = day;
 
   // 더블헤더
   if (games.length >= 2) {
@@ -36,8 +36,8 @@ function DayCell({ day, onEnter, onMove, onLeave, onTouchStart }: Props) {
         onMouseLeave={onLeave}
         onTouchStart={(e) => onTouchStart(day, e)}
       >
-        <div className={half1} />
-        <div className={half2} />
+        <div className={watchedIds.has(g1.id) ? `${half1} ${styles.watched}` : half1} />
+        <div className={watchedIds.has(g2.id) ? `${half2} ${styles.watched}` : half2} />
       </div>
     );
   }
@@ -59,10 +59,11 @@ function DayCell({ day, onEnter, onMove, onLeave, onTouchStart }: Props) {
   const variant = getCellVariant(games[0]);
   const validVariant =
     (variant as keyof typeof styles.cellVariants) in styles.cellVariants ? variant : 'empty';
+  const cellClass = styles.cellVariants[validVariant as keyof typeof styles.cellVariants];
 
   return (
     <div
-      className={styles.cellVariants[validVariant as keyof typeof styles.cellVariants]}
+      className={watchedIds.has(games[0].id) ? `${cellClass} ${styles.watched}` : cellClass}
       onMouseEnter={(e) => onEnter(day, e)}
       onMouseMove={onMove}
       onMouseLeave={onLeave}

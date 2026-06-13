@@ -59,6 +59,22 @@ const cellHalfBase = style({
   width: '100%',
   flex: 1,
   minHeight: 0,
+  position: 'relative',
+});
+
+export const watched = style({
+  selectors: {
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      bottom: '2px',
+      right: '2px',
+      width: '3px',
+      height: '3px',
+      borderRadius: '50%',
+      background: 'rgba(0,0,0,0.5)',
+    },
+  },
 });
 
 export const cellHalfVariants = styleVariants({

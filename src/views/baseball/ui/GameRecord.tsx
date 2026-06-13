@@ -20,6 +20,7 @@ interface Props {
   games: Game[];
   heatmapGames: Game[];
   season: number;
+  watchedGameIds: string[];
 }
 
 function StatGroup({ stats }: { stats: SeasonStats }) {
@@ -44,7 +45,7 @@ function StatGroup({ stats }: { stats: SeasonStats }) {
   );
 }
 
-function GameRecord({ games, heatmapGames, season }: Props) {
+function GameRecord({ games, heatmapGames, season, watchedGameIds }: Props) {
   const teamName = GameEntity.KBO_TEAMS[BaseballConfig.teamCode].name;
 
   const regularStats = calculateStats(games.filter((g) => g.gameType === 'regular'));
@@ -67,7 +68,7 @@ function GameRecord({ games, heatmapGames, season }: Props) {
           <span className={styles.heatmapTitle}>경기 결과</span>
         </div>
 
-        <Heatmap games={heatmapGames} />
+        <Heatmap games={heatmapGames} watchedGameIds={watchedGameIds} />
       </div>
     </section>
   );

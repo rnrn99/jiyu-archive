@@ -17,19 +17,21 @@ import MonthLabel from './MonthLabel';
 import { HeatmapDay } from './types';
 import { buildHeatmapGrid } from './utils';
 
-const computeFlipLeft = (clientX: number) => clientX + TOOLTIP_MAX_WIDTH > window.innerWidth;
+const computeFlipLeft = (clientX: number) =>
+  typeof window !== 'undefined' && clientX + TOOLTIP_MAX_WIDTH > window.innerWidth;
 
 interface Props {
   games: Game[];
+  watchedGameIds: string[];
 }
 
-function Heatmap({ games }: Props) {
+function Heatmap({ games, watchedGameIds }: Props) {
   const [hoveredDay, setHoveredDay] = useState<HeatmapDay | null>(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const mounted = useMounted();
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const { weeks, monthLabels } = buildHeatmapGrid(games);
+  const { weeks, monthLabels } = buildHeatmapGrid(games, new Set(watchedGameIds));
 
   const flipLeft = computeFlipLeft(tooltipPos.x);
 

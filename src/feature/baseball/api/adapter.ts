@@ -128,6 +128,15 @@ class BaseballAdapter {
 
     return (data as GameResultItem[]).map((row) => BaseballAdapter.toGame(row, teamId));
   });
+
+  static getWatchedGameIds = cache(async (): Promise<string[]> => {
+    const { data, error } = await supabase.from('watched').select('game_id');
+
+    if (error) throw new Error(`Failed to fetch watched games: ${error.message}`);
+    if (!data) return [];
+
+    return data.map((row) => row.game_id as string);
+  });
 }
 
 export default BaseballAdapter;

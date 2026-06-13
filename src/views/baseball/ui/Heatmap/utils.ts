@@ -21,7 +21,7 @@ const MONTH_NAMES = [
 
 const CELL_SIZE = 16;
 const WEEKS = BaseballConfig.heatmapWeeks;
-export const buildHeatmapGrid = (games: Game[]): HeatmapGrid => {
+export const buildHeatmapGrid = (games: Game[], watchedGameIds: Set<string>): HeatmapGrid => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -62,9 +62,11 @@ export const buildHeatmapGrid = (games: Game[]): HeatmapGrid => {
       const isFuture = cursor > today;
       const allGames = gamesByDate.get(dateStr) ?? [];
 
+      const visibleGames = isFuture ? allGames.filter((g) => g.status === 'scheduled') : allGames;
       week.push({
         date: dateStr,
-        games: isFuture ? allGames.filter((g) => g.status === 'scheduled') : allGames,
+        games: visibleGames,
+        watchedIds: new Set(visibleGames.filter((g) => watchedGameIds.has(g.id)).map((g) => g.id)),
       } satisfies HeatmapDay);
 
       cursor.setDate(cursor.getDate() + 1);
